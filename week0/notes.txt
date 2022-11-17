@@ -1,0 +1,15 @@
+-- BINARY -- 
+represent numbers, letters, colours, images, videos, music with binary digits (bits)
+different file formats will specify on how the bits will represent different things (letters,colour,sound)
+
+-- ALGORITHM -- 
+a set of instructions that tells a computer what to do 
+input -> ALGORITHM -> output
+
+4 main things in an algorithm:
+    functions
+    conditions 
+    booleans
+    loops 
+
+-- SCRATCH -- 
