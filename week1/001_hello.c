@@ -5,5 +5,5 @@ int main(void)
 {
     printf("hello, world\n");
     string answer = get_string("What's your name? ");    // get_string is a function from cs50 library
-    printf("hello, %s! \n", answer);                    // %s: placeholder for a string
+    printf("hello, %s! \n", answer);                     // %s: placeholder for a string
 }

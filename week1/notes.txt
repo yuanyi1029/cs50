@@ -1,14 +1,69 @@
--- Compiler --
-Converts human written source code to computer understandable machine code
+----------------------------------- Compiler ----------------------------------
+converts human written source code to computer understandable machine code
 source code -> compiler -> machine code (understandable by computers)
 
--- C -- 
+we use 'make filename' in cs50 which is a program that acts as a compiler
+'make' program will look for the file name in hard disk and convert it from
+source code to machine code
+
+-------------------------------- C Programming --------------------------------
 C programming simplified manual:
 manual.cs50.io
 cs50.readthedocs.io/libraries/cs50/c/
 
-Printing hello world:
-printf("hello world\n")
+Printing:
+printf("hello world\n");
+printf("hello %s\n", answer);
 
+Variables:
+Data types: bool, char, double, float, int, long, string
+string name = David;
+int counter = 0;
+const string animal = cat;      // use const for variables that done change (constant)
 
+Conditionals:
+if (x < y)
+{
+    // function (do something)
+}
+else if (x == y)
+{
+    // function (do something)
+}
+else
+{
+    // function (do something)
+}
 
+Loops:
+int counter = 0;
+while (counter < 3)
+{
+    // function (do something)
+    counter++
+}
+
+for (int counter = 0; counter <3; counter++)
+{
+    // function (do something)
+}
+
+Functions:
+
+int get_size(void)                  // return_type function_name(parameters)             
+{
+    // function (do something)
+    return n                        // return an integer
+}
+
+---------------------------- Command Line Interface ---------------------------
+Terminal commands:
+ls                         // list files inside a directory
+cd                         // change directory (enter a directory)
+cp                         // copy a file
+mv filename newfilename    // used to rename a filename
+mkdir                      // create a new directory 
+rm                         // remove a file
+rmdir                      // remvoe a directory
+
+ 
