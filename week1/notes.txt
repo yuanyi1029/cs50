@@ -1,0 +1,14 @@
+-- Compiler --
+Converts human written source code to computer understandable machine code
+source code -> compiler -> machine code (understandable by computers)
+
+-- C -- 
+C programming simplified manual:
+manual.cs50.io
+cs50.readthedocs.io/libraries/cs50/c/
+
+Printing hello world:
+printf("hello world\n")
+
+
+

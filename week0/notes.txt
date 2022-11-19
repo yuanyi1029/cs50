@@ -3,7 +3,7 @@ represent numbers, letters, colours, images, videos, music with binary digits (b
 different file formats will specify on how the bits will represent different things (letters,colour,sound)
 
 -- ALGORITHM -- 
-a set of instructions that tells a computer what to do 
+a set of instructions that tells a computer what to do for solving problems
 input -> ALGORITHM -> output
 
 4 main things in an algorithm:
@@ -11,5 +11,3 @@ input -> ALGORITHM -> output
     conditions 
     booleans
     loops 
-
--- SCRATCH -- 
