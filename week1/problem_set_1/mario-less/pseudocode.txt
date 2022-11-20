@@ -1,0 +1,7 @@
+Get height from user
+If height is less than 1 or greater than 8, go back to line 1
+Loop through 1 to height (represents each row, represented by i)
+    Loop through 1 to height and print spaces (represents each column, represented by j)
+        print hash if j column number is larger than height - row number
+        else print a space
+    print a new line after each row

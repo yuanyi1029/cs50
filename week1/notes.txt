@@ -16,7 +16,8 @@ printf("hello world\n");
 printf("hello %s\n", answer);
 
 Variables:
-Data types: bool, char, double, float, int, long, string
+Data types: char, double, float, int, long, string, bool 
+(string and bool are only provided by cs50)
 string name = David;
 int counter = 0;
 const string animal = cat;      // use const for variables that done change (constant)
@@ -35,6 +36,23 @@ else
     // function (do something)
 }
 
+
+switch (x)
+{
+    case 1:
+        //function (do something)
+        break
+    case 2:
+        //function (do something)
+        break
+    case 3:
+        //function (do something)
+        break
+}
+
+
+int x = (expression) ? 1 : 2;
+
 Loops:
 int counter = 0;
 while (counter < 3)
@@ -42,6 +60,13 @@ while (counter < 3)
     // function (do something)
     counter++
 }
+
+
+do
+{
+    // function (do something)
+}
+while (condition)
 
 for (int counter = 0; counter <3; counter++)
 {
@@ -66,4 +91,7 @@ mkdir                      // create a new directory
 rm                         // remove a file
 rmdir                      // remvoe a directory
 
- 
+Terminal commands with extra specifications:
+cp -r                      // copy everything inside a folder 
+rm -r                      // remove everything inside a folder
+rm -f                      // remove a file without asking for confirmation
