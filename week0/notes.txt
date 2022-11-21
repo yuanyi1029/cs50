@@ -1,8 +1,8 @@
--- BINARY -- 
+--------------------------------- Binary ----------------------------------
 represent numbers, letters, colours, images, videos, music with binary digits (bits)
 different file formats will specify on how the bits will represent different things (letters,colour,sound)
 
--- ALGORITHM -- 
+-------------------------------- Algorithm --------------------------------
 a set of instructions that tells a computer what to do for solving problems
 input -> ALGORITHM -> output
 

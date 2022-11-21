@@ -1,6 +1,6 @@
 ----------------------------------- Compiler ----------------------------------
 converts human written source code to computer understandable machine code
-source code -> compiler -> machine code (understandable by computers)
+source code -> compiler -> assembly language -> machine code (understandable by computers)
 
 we use 'make filename' in cs50 which is a program that acts as a compiler
 'make' program will look for the file name in hard disk and convert it from
@@ -67,6 +67,8 @@ do
     // function (do something)
 }
 while (condition)
+
+
 
 for (int counter = 0; counter <3; counter++)
 {

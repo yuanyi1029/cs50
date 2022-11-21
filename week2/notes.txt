@@ -1,0 +1,70 @@
+----------------------------------- Compiler ----------------------------------
+converts human written source code to computer understandable machine code
+source code -> compiler -> machine code (understandable by computers)
+
+we used 'make filename' in week 1, but 'make' command actually uses clang 
+compiler (an actual compiler)
+week 1 compile method: make filename
+week 2 compile method: clang -o machinecodefilename filename -lcs50
+// -lcs50 links the cs50 library to our code
+// -l + library name (depending on what library you use, not just cs50 library)
+
+----------------------------- Steps of Compiling ------------------------------
+Step 1: Pre-processing
+#include <stdio.h>
+#include <cs50.h>
+The compiler will find standard.io and cs50 libraries from /usr/include and 
+will load the source code of the libraries at the top of the program for usage. 
+Lines of code with hashes '#' at the start are loaded first for pre-processing
+
+Step 2: Compiling
+The compiler converts source code to assembly language (low level language) 
+
+Step 3: Assembling
+The compiler assembles the assembly language to machine code (0s & 1s)
+
+Step 4: Linking
+The compiler links the user's code with all the libraries that were included 
+into a group of 0s and 1s
+
+------------------------------ Debugging methods ------------------------------
+1. Use print statements
+2. Use debugging tools in vscode by stating a break/stop point and then use step
+   over or step in to slowly look at each step and find the error 
+   (we use 'debug50 filename' in cs50) 
+3. Use rubber duck debugging (sound out the problem to yourself/friends verbally)
+   
+------------------------------------ Arrays -----------------------------------
+int x[3]                    // declaring an integer array x of length 3 
+x[0] = 72
+x[1] = 73
+x[2] = 33
+
+passing arrays into functions as parameters:
+int average (int x[])       // specifying that the parameter is an array
+{
+    // function (do something)
+}
+
+----------------------------------- Strings -----------------------------------
+
+
+
+
+
+
+
+
+Terminal commands:
+ls                         // list files inside a directory
+cd                         // change directory (enter a directory)
+cp                         // copy a file
+mv filename newfilename    // used to rename a filename
+mkdir                      // create a new directory 
+rm                         // remove a file
+rmdir                      // remvoe a directory
+
+Terminal commands with extra specifications:
+cp -r                      // copy everything inside a folder 
+rm -r                      // remove everything inside a folder
+rm -f                      // remove a file without asking for confirmation
