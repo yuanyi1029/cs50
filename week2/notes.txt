@@ -34,11 +34,20 @@ into a group of 0s and 1s
    (we use 'debug50 filename' in cs50) 
 3. Use rubber duck debugging (sound out the problem to yourself/friends verbally)
    
+-------------------------- Memory size of data types --------------------------
+int     (4 byte)            bool    (1 byte)
+long    (8 byte)            char    (1 byte)
+float   (4 byte)            string  (? bytes)
+double  (8 byte)
+
+
 ------------------------------------ Arrays -----------------------------------
 int x[3]                    // declaring an integer array x of length 3 
 x[0] = 72
 x[1] = 73
 x[2] = 33
+
+int x[3] = {72, 73, 33}
 
 passing arrays into functions as parameters:
 int average (int x[])       // specifying that the parameter is an array
@@ -47,6 +56,51 @@ int average (int x[])       // specifying that the parameter is an array
 }
 
 ----------------------------------- Strings -----------------------------------
+Strings are actually just an array of characters (char)
+If a string has n number of characters, it will be n+1 bytes long. This is because 
+the computer stores an extra '\0' character to represent the end of a string  
+
+Getting the length of a string:
+1) Use strlen function from string.h library
+    #include <string.h>
+    int length = strlen(word)
+
+
+2) Do it manually with a counter and a loop
+    int counter = 0
+    while (word[counter] != '\0')   // counter++ if each character is not \0 (last character)
+    {
+        counter++
+    }
+    return counter
+
+
+Converting a string to Uppercase:
+1) Use toupper() function from ctype.h library
+    #include <ctype.h>
+    for (int i = 0; i < strlen(word); i++)
+    {
+        printf("%c", toupper(word[i]));
+    }
+
+2) Get each character of the string and subtract it by 32 (based on ASCII table) 
+    for (int i = 0; i < strlen(word); i++)
+    {
+        if (word[i] >= 'a' && word[i] <= 'z')
+        {
+            printf("%c", word[i] - 32);
+        }
+        else
+        {
+            printf("%c", word[i]);
+        }
+    }
+
+
+
+--------------------------------- Cryptography --------------------------------
+(Plaintext + key) -> Cipher -> Ciphertext
+A cipher is just an algorithm (program) that encrypts plaintext to ciphertext 
 
 
 
@@ -55,16 +109,14 @@ int average (int x[])       // specifying that the parameter is an array
 
 
 
-Terminal commands:
-ls                         // list files inside a directory
-cd                         // change directory (enter a directory)
-cp                         // copy a file
-mv filename newfilename    // used to rename a filename
-mkdir                      // create a new directory 
-rm                         // remove a file
-rmdir                      // remvoe a directory
 
-Terminal commands with extra specifications:
-cp -r                      // copy everything inside a folder 
-rm -r                      // remove everything inside a folder
-rm -f                      // remove a file without asking for confirmation
+
+
+
+
+
+
+
+
+
+

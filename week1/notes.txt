@@ -23,65 +23,70 @@ int counter = 0;
 const string animal = cat;      // use const for variables that done change (constant)
 
 Conditionals:
-if (x < y)
-{
-    // function (do something)
-}
-else if (x == y)
-{
-    // function (do something)
-}
-else
-{
-    // function (do something)
-}
+    if (x < y)
+    {
+        // function (do something)
+    }
+    else if (x == y)
+    {
+        // function (do something)
+    }
+    else
+    {
+        // function (do something)
+    }
 
 
-switch (x)
-{
-    case 1:
-        //function (do something)
-        break
-    case 2:
-        //function (do something)
-        break
-    case 3:
-        //function (do something)
-        break
-}
+    switch (x)
+    {
+        case 1:
+            //function (do something)
+            break
+        case 2:
+            //function (do something)
+            break
+        case 3:
+            //function (do something)
+            break
+    }
 
 
-int x = (expression) ? 1 : 2;
+    int x = (expression) ? 1 : 2;
 
 Loops:
-int counter = 0;
-while (counter < 3)
-{
-    // function (do something)
-    counter++
-}
+    int counter = 0;
+    while (counter < 3)
+    {
+        // function (do something)
+        counter++
+    }
 
 
-do
-{
-    // function (do something)
-}
-while (condition)
+    do
+    {
+        // function (do something)
+    }
+    while (condition)
 
 
 
-for (int counter = 0; counter <3; counter++)
-{
-    // function (do something)
-}
+    for (int counter = 0; counter <3; counter++)
+    {
+        // function (do something)
+    }
 
 Functions:
+    return_type function_name(arguments)
+    {
+        // function (do something)
+    }
 
-int get_size(void)                  // return_type function_name(parameters)             
-{
-    // function (do something)
-    return n                        // return an integer
-}
+    Example: 
+    int get_size(void)                        
+    {
+        // function (do something)
+        return n                        
+    }
 
 ---------------------------- Command Line Interface ---------------------------
 Terminal commands:
@@ -93,7 +98,7 @@ mkdir                      // create a new directory
 rm                         // remove a file
 rmdir                      // remvoe a directory
 
-Terminal commands with extra specifications:
+Terminal commands with extra specifications (arguments):
 cp -r                      // copy everything inside a folder 
 rm -r                      // remove everything inside a folder
 rm -f                      // remove a file without asking for confirmation
