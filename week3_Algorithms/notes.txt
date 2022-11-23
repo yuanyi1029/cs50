@@ -1,0 +1,134 @@
+----------------------------------- Algorithms --------------------------------
+Types of Algorithms for searching something:
+1) Linear Search - search sequentially
+2) Binary Search - search by constantly halving 
+3) Bubble Search -  
+
+Linear Search: 
+Loops through the entire array until the element is found
+
+Binary Search: 
+Starts at the middle of the array, determine if the element is lower or higher, 
+then go to the middle of the upper / lower section and repeat the process until
+the element is found
+
+Bubble Search: 
+
+-------------------------------- Running Time ---------------------------------
+All algorithms have a running time which represents roughly how fast / slow the algorithm is
+(represented by O)
+
+Slowest to Fastest running times: 
+O(n ^ 2) > O(n log n) > O(n) > O(log n) > O(1)          
+
+Linear search has a running time of O(n)
+Binary search has a running time of O(log n)
+
+-------------------------------- Data Structure -------------------------------
+Data structures are a specialized way of storing and processing data 
+Arrays are a type of data structure that allows us to store data back-to-back
+Modern programming languages allows us to invent our own data structures
+
+Implementing a new data structure:
+    typedef struct
+    {
+        // variables
+    }
+    structure_name
+
+
+
+
+
+
+
+
+
+
+   
+-------------------------- Memory size of data types --------------------------
+int     (4 byte)            bool    (1 byte)
+long    (8 byte)            char    (1 byte)
+float   (4 byte)            string  (? bytes)
+double  (8 byte)
+
+
+------------------------------------ Arrays -----------------------------------
+int x[3]                    // declaring an integer array x of length 3 
+x[0] = 72
+x[1] = 73
+x[2] = 33
+
+int x[3] = {72, 73, 33}
+
+passing arrays into functions as parameters:
+int average (int x[])       // specifying that the parameter is an array
+{
+    // function (do something)
+}
+
+----------------------------------- Strings -----------------------------------
+Strings are actually just an array of characters (char)
+If a string has n number of characters, it will be n+1 bytes long. This is because 
+the computer stores an extra '\0' character to represent the end of a string  
+
+Getting the length of a string:
+1) Use strlen function from string.h library
+    #include <string.h>
+    int length = strlen(word)
+
+
+2) Do it manually with a counter and a loop
+    int counter = 0
+    while (word[counter] != '\0')   // counter++ if each character is not \0 (last character)
+    {
+        counter++
+    }
+    return counter
+
+
+Converting a string to Uppercase:
+1) Use toupper() function from ctype.h library
+    #include <ctype.h>
+    for (int i = 0; i < strlen(word); i++)
+    {
+        printf("%c", toupper(word[i]));
+    }
+
+2) Get each character of the string and subtract it by 32 (based on ASCII table) 
+    for (int i = 0; i < strlen(word); i++)
+    {
+        if (word[i] >= 'a' && word[i] <= 'z')
+        {
+            printf("%c", word[i] - 32);
+        }
+        else
+        {
+            printf("%c", word[i]);
+        }
+    }
+
+
+
+--------------------------------- Cryptography --------------------------------
+(Plaintext + key) -> Cipher -> Ciphertext
+A cipher is just an algorithm (program) that encrypts plaintext to ciphertext 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

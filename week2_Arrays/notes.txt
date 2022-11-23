@@ -27,14 +27,14 @@ Step 4: Linking
 The compiler links the user's code with all the libraries that were included 
 into a group of 0s and 1s
 
------------------------------- Debugging methods ------------------------------
+------------------------------ Debugging Methods ------------------------------
 1. Use print statements
 2. Use debugging tools in vscode by stating a break/stop point and then use step
    over or step in to slowly look at each step and find the error 
    (we use 'debug50 filename' in cs50) 
 3. Use rubber duck debugging (sound out the problem to yourself/friends verbally)
    
--------------------------- Memory size of data types --------------------------
+-------------------------- Memory Size of Data Types --------------------------
 int     (4 byte)            bool    (1 byte)
 long    (8 byte)            char    (1 byte)
 float   (4 byte)            string  (? bytes)
@@ -42,12 +42,13 @@ double  (8 byte)
 
 
 ------------------------------------ Arrays -----------------------------------
+An array is a block of adjacent spaces in memory 
 int x[3]                    // declaring an integer array x of length 3 
 x[0] = 72
 x[1] = 73
 x[2] = 33
 
-int x[3] = {72, 73, 33}
+int x[] = {72, 73, 33}    // another way to initialise array (static, size can't change anymore)
 
 passing arrays into functions as parameters:
 int average (int x[])       // specifying that the parameter is an array
@@ -96,27 +97,24 @@ Converting a string to Uppercase:
         }
     }
 
+Comparing 2 string:
+1) Use strcmp() function from string.h library
+    #include(string.h)
+    if (strcmp(word1, word2) == 0)      // If the 2 strings are equal, it will return 0 
+    {
+        // functon (do something)
+    }
 
+---------------------------- Command Line Arguments ---------------------------
+Command line arguments are arguments that are collected at the terminal before the program runs
 
+To accept Command line arguments, declare main like this:
+    int main (int argc, string argv[])
+    {
+        // function (do something)
+    }
+where argv is an array of arguments, and argc is the length of the array (number of arguments)
+ 
 --------------------------------- Cryptography --------------------------------
 (Plaintext + key) -> Cipher -> Ciphertext
 A cipher is just an algorithm (program) that encrypts plaintext to ciphertext 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
