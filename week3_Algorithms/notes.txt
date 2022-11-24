@@ -1,8 +1,7 @@
------------------------------------ Algorithms --------------------------------
-Types of Algorithms for searching something:
+------------------------------ Searching Algorithms ---------------------------
+Types of Algorithms for searching:
 1) Linear Search - search sequentially
 2) Binary Search - search by constantly halving 
-3) Bubble Search -  
 
 Linear Search: 
 Loops through the entire array until the element is found
@@ -10,9 +9,20 @@ Loops through the entire array until the element is found
 Binary Search: 
 Starts at the middle of the array, determine if the element is lower or higher, 
 then go to the middle of the upper / lower section and repeat the process until
-the element is found
+the element is found (Data must be sorted orderly to use binary search)
 
-Bubble Search: 
+------------------------------- Sorting Algorithms ----------------------------
+Types of Algorithms for sorting:
+1) Selection Sort - sorting by finding smallest and place it accordingly
+1) Bubble Sort - sorting by comparing 2 elements and swap places, repeat until sorted 
+
+Selection Sort:
+Loops through the entire array, look for the smallest element and swap places
+with the current element 
+
+Bubble Sort:
+Loops through 
+
 
 -------------------------------- Running Time ---------------------------------
 All algorithms have a running time which represents roughly how fast / slow the algorithm is
