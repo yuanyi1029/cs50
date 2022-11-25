@@ -1,39 +1,54 @@
 ------------------------------ Searching Algorithms ---------------------------
-Types of Algorithms for searching:
-1) Linear Search - search sequentially
+Searching Algorithms are used to find an element in an array
+
+Types of Searching Algorithms:
+1) Linear Search - search sequentially 
 2) Binary Search - search by constantly halving 
 
 Linear Search: 
-Loops through the entire array until the element is found
+Loops through the entire array from left to right until the element is found
 
 Binary Search: 
 Starts at the middle of the array, determine if the element is lower or higher, 
 then go to the middle of the upper / lower section and repeat the process until
-the element is found (Data must be sorted orderly to use binary search)
+the element is found (array must be sorted orderly to use binary search)
 
 ------------------------------- Sorting Algorithms ----------------------------
+Sorting Algorithms sorts an array of elements
+
 Types of Algorithms for sorting:
 1) Selection Sort - sorting by finding smallest and place it accordingly
-1) Bubble Sort - sorting by comparing 2 elements and swap places, repeat until sorted 
+2) Bubble Sort  - sorting by comparing 2 elements and swap places, repeat until sorted 
+3) Merge Sort - sorting 2 halves and compare the smallest element of each halve
 
 Selection Sort:
 Loops through the entire array, look for the smallest element and swap places
-with the current element 
+with the first element of the unsorted part 
 
 Bubble Sort:
-Loops through 
+Loops through the array constantly checking between 2 elements and swap places if
+the elements are in the wrong order, repeat this process until the array is sorted
+(generally moves high values to the right and low values to the left)
+
+Merge Sort:
+Sort 2 halves of the array, compare the smallest element of each halve, then
+get the smallest element and put it in a new array 
 
 
 -------------------------------- Running Time ---------------------------------
 All algorithms have a running time which represents roughly how fast / slow the algorithm is
 (represented by O)
 
-Slowest to Fastest running times: 
+Slowest to Fastest running times:  
 O(n ^ 2) > O(n log n) > O(n) > O(log n) > O(1)          
 
 Linear search has a running time of O(n)
 Binary search has a running time of O(log n)
 
+Linear sort has a running time of O(n ^ 2) 
+Bubble sort has a running time of O(n ^ 2)           
+Bubble sort has a running time of O(n log n)           
+ 
 -------------------------------- Data Structure -------------------------------
 Data structures are a specialized way of storing and processing data 
 Arrays are a type of data structure that allows us to store data back-to-back
@@ -46,99 +61,9 @@ Implementing a new data structure:
     }
     structure_name
 
+---------------------------------- Recursion ----------------------------------
+A programming technique that makes a function call itself as part of its execution
 
-
-
-
-
-
-
-
-
-   
--------------------------- Memory size of data types --------------------------
-int     (4 byte)            bool    (1 byte)
-long    (8 byte)            char    (1 byte)
-float   (4 byte)            string  (? bytes)
-double  (8 byte)
-
-
------------------------------------- Arrays -----------------------------------
-int x[3]                    // declaring an integer array x of length 3 
-x[0] = 72
-x[1] = 73
-x[2] = 33
-
-int x[3] = {72, 73, 33}
-
-passing arrays into functions as parameters:
-int average (int x[])       // specifying that the parameter is an array
-{
-    // function (do something)
-}
-
------------------------------------ Strings -----------------------------------
-Strings are actually just an array of characters (char)
-If a string has n number of characters, it will be n+1 bytes long. This is because 
-the computer stores an extra '\0' character to represent the end of a string  
-
-Getting the length of a string:
-1) Use strlen function from string.h library
-    #include <string.h>
-    int length = strlen(word)
-
-
-2) Do it manually with a counter and a loop
-    int counter = 0
-    while (word[counter] != '\0')   // counter++ if each character is not \0 (last character)
-    {
-        counter++
-    }
-    return counter
-
-
-Converting a string to Uppercase:
-1) Use toupper() function from ctype.h library
-    #include <ctype.h>
-    for (int i = 0; i < strlen(word); i++)
-    {
-        printf("%c", toupper(word[i]));
-    }
-
-2) Get each character of the string and subtract it by 32 (based on ASCII table) 
-    for (int i = 0; i < strlen(word); i++)
-    {
-        if (word[i] >= 'a' && word[i] <= 'z')
-        {
-            printf("%c", word[i] - 32);
-        }
-        else
-        {
-            printf("%c", word[i]);
-        }
-    }
-
-
-
---------------------------------- Cryptography --------------------------------
-(Plaintext + key) -> Cipher -> Ciphertext
-A cipher is just an algorithm (program) that encrypts plaintext to ciphertext 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Basic reuirements for a recursive function:
+Base case           (will terminate the recusive process when triggered)
+Recursive case      (function calls itself that solves a smaller range of the problem)
