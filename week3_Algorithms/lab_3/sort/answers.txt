@@ -1,0 +1,23 @@
+sort1 uses: bubble sort
+
+How do you know?: sort1 uses bubble sort because it has a relatively long runtime of 7.3 seconds and 5.5 seconds
+respectively when sorting random50000.txt and reversed50000.txt but had a very short runtime of 0.4 seconds when
+sorting sorted50000.txt. For bubble sort, the bubble sorting process has a checking feature that stops when no swaps happened
+which explains the short runtime when sorting sorted50000.txt because the function only has to loop once before it
+stops. However when sorting random50000.txt and reversed50000.txt, the function has to loop many times when 2 elements
+are swapping places which explains the long runtime.
+
+sort2 uses: merge sort
+
+How do you know?: sort2 uses merge sort because it consitently has an average runtime of 0.5 seconds when sorting
+random50000.txt, reversed50000.txt, and sorted50000.txt. For merge sort, the sorting process is very short because
+it recursively breaks the problem into smaller parts and sorting 2 halves repeatedly until the entire problem is solved,
+without looping multiple times. It also has a smaller running time of O(n log n) compared to the other 2 sorting methods
+of O(n ^ 2), which also explains the short runtime.
+
+sort3 uses: selection sort
+
+How do you know?: sort3 uses selection sort because it consitently has a runtime of 3 seconds when sorting
+random50000.txt, reversed50000.txt, and sorted50000.txt. For selection sort, the sorting process must carry
+out the entire process of looping even if the entire file is sorted because it has no checking feature. Therefore, even
+when running sorted50000.txt. The function still has a long runtime of 3 seconds.
