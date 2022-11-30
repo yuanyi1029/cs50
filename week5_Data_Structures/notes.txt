@@ -1,0 +1,121 @@
+------------------------------------ Memory ----------------------------------- 
+------------------------------ Pointers with Files ---------------------------- 
+
+
+---------------------------- Abstract Data Structures -------------------------
+Stacks and Queues are abstract data structures
+Stacks are Last In First Out (LIFO)
+Queues are First In First Out (FIFO)
+
+
+
+Data structures are a specialized way of storing and processing data 
+Arrays are a type of data structure that allows us to store data back-to-back
+Modern programming languages allows us to invent our own data structures
+
+Implementing a new data structure:
+    typedef struct
+    {
+        // variables
+    }
+    structure_name
+
+
+
+
+
+
+
+
+Hexadecimal format is a concise way to express memeory on a computer system
+represented with 0x at the front (0x10, 0xA6, 0xFF)
+Hexadecimal is base 16 where 2 hex digits can represent up to decimal of 255 or 8 bits (1 byte)
+0xFF = 11111111 = 255
+
+Operators related to memory:
+&           (Used to get the memory address of a variable)
+*           (Used to go to a memory address)
+
+Functions related to memory:
+malloc()    (Request a chunk of space)
+free()      (Free up the chunk of space when finished using it)
+scanf()     (Get input from the user)
+
+Examples:
+    int *p = &n
+
+    int *x = malloc(4)
+
+    int y;
+    printf("y: ")
+    scanf("%i", &y)
+
+p is an address variable (pointer) that stores the address of an integer variable n
+x in an address variable (pointer) than can point to 4 bytes of memory
+scanf gets the user input and stores it at the address of y 
+
+----------------------------------- Pointers ---------------------------------- 
+Pointers are just addresses of variables 
+Pointers can be used to pass actual values of variables into functions (previously impossible)
+
+The '*' can also be used:
+1) To initialise a variable as a pointer
+    int *x = &10;
+2) To go to the reference and access the data
+    printf("%i\n",*x)     // Go to the address of x and print the value
+
+When not setting a pointer immediately, always set pointers to NULL first
+    int *x = NULL 
+ 
+----------------------------- Pointers with strings --------------------------- 
+The variable that stores a string is just storing the address of the first character
+of that string. (Same with arrays as well)
+
+Therefore:
+string s = "HI"     is the same as     char *s = "HI!"
+
+Using arithmetic with pointers:    
+*s              // Go to memory address of s        
+*(s + 1)        // Go to the next memory address of s 
+
+Comparing strings:
+We cannot use "==" when comparing string variables because the 2 variables may
+have the same contents, but the variables have different addresses so it would 
+never be equal.
+Solution: Use strcmp(s,t) == 0
+    char *s = "HI!"
+    char *t = "HI!"
+    s == t              (false because s and t have different addresses) 
+
+Copying strings:
+When assigning a variable to a string, that variable only stores a copy of 
+the string's address where changing one of s or t will result in changes in both
+    char *s = "HI!"     (s stores the address of the first character of "HI!")
+    char *t = s         (t makes a copy of s which is just the address of "HI!")
+Solution: Use malloc() from stdlib library to get a chunk of space and strcpy() 
+          to copy the string
+    char *s = "HI!"
+    char *t = malloc(4)  // 4 because we need \0 at the end (HI!\0)
+    strcpy(t, s)
+
+------------------------------ Pointers with Files ---------------------------- 
+Initialise a variable as a file pointer with FILE * 
+
+File functions:
+fopen()     // Opens a file
+fclose()    // Close a file 
+fgetc()     // Reads and returns the next character of the pointed file
+fputc()     // Writes or appends a character to the pointed file
+fread()     // Reads a number of units of a certain size from a certain file and
+            // stores them in a buffer (usually an array)
+fwrite()    // Writes a number of units of a certain size from a certain file from
+            // a buffer (usually an array)
+Example:
+FILE *my_file = fopen(filename, "r")        // "r" is the operation to read the file only
+fclose(file_pointer)                        // Close the file
+char y = fgetc(file_pointer)                // get the next character of a file, store it in y
+fputc('A', file_pointer)                    // Write 'A' to a file
+fread(array, sizeof(int), 10, file_pointer) // Read from file of 40 bytes (4 x 10 times) and 
+                                            // store it into an array
+fwrite(array, sizeof(int), 10, file_pointer)// Write 40 bytes (4 x 10 times) into a file of 
+                                            // from the array 
