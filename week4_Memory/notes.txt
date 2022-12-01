@@ -70,7 +70,7 @@ Solution: Use malloc() from stdlib library to get a chunk of space and strcpy()
     char *t = malloc(4)  // 4 because we need \0 at the end (HI!\0)
     strcpy(t, s)
 
------------------------------- Pointers with Files ---------------------------- 
+--------------------------------- File Pointers -------------------------------
 Initialise a variable as a file pointer with FILE * 
 
 File functions:
