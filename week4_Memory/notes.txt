@@ -9,7 +9,7 @@ Operators related to memory:
 *           (Used to go to a memory address)
 
 Functions related to memory:
-malloc()    (Request a chunk of space)
+malloc()    (Stands for memory allocation, request a chunk of free memory)
 free()      (Free up the chunk of space when finished using it)
 scanf()     (Get input from the user)
 
@@ -33,7 +33,7 @@ Pointers can be used to pass actual values of variables into functions (previous
 The '*' can also be used:
 1) To initialise a variable as a pointer
     int *x = &10;
-2) To go to the reference and access the data
+2) To go to the reference and access the data (dereferencing)
     printf("%i\n",*x)     // Go to the address of x and print the value
 
 When not setting a pointer immediately, always set pointers to NULL first

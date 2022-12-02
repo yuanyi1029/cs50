@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    // Arrays variables just store the address of the first element of the array
+    // Array variables just store the address of the first element of the array
     // Size of array =  3 x the size of an integer (4)
     int *x = malloc(3 * sizeof(int));
     if (x == NULL)

@@ -1,11 +1,134 @@
------------------------------------- Memory ----------------------------------- 
------------------------------- Pointers with Files ---------------------------- 
-
-
 ---------------------------- Abstract Data Structures -------------------------
 Stacks and Queues are abstract data structures
 Stacks are Last In First Out (LIFO)
 Queues are First In First Out (FIFO)
+
+-------------------------------- Resizing Arrays ------------------------------ 
+2 ways to resize an array:
+1) Use realloc() to re-allocate a larger chunk of memory to store the larger array
+2) Use linked lists that link each element with pointers 
+
+---------------------------------- Linked Lists -------------------------------
+Linked Lists are a new type of data structure 
+Similar to array but elements are not stored next to each other, elements are
+stored at different memory locations linked together with pointers
+When resizing an array, each elements of a linked list points to the address of 
+another element in the memory without the need to copying and moving the entire array 
+
+Defining a linked list:
+typedef struct node
+{
+    int number
+    struct node *next_node       // next_node will be a pointer to the next node
+}
+node;
+
+5 Steps to Initialise a linked list:
+1) Declare a list pointer of NULL
+2) Assign a node pointer to malloc(sizeof(node)) 
+   node *n = malloc(sizeof(node))   // malloc() will return the address of a memory chunk 
+3) Set the node variable values
+   // Go to the address of n, then go to the number variable of the node and set it to 1
+   (*n).number = 1      OR       n -> number = 1
+   // next_node will be NULL because the next node is not created yet
+   (*n).next_node = NULL    OR      n -> next_node = NULL
+4) Make the list pointer point to same location as the node pointer (point to first node)
+   list = n   
+5) Repeat step 2 - 4 to add another node, but for step 3, next_node should point to the
+   same location as list
+   // Since list is pointing to the first node, the new node should also point to 
+   // the first node
+   (*n).next_node = list    OR      n -> next_node = list
+
+Note:
+When the second node is created, its next_node variable will be made to point to the 
+first node. Therefore this is a stack type data structure where the newest nodes are 
+at the top (Last in First Out, LIFO)
+   
+
+Downsides to linked lists:
+1) Takes up more memory than arrays (to store the pointers)
+2) Unable to use indexing to get an element + Unable to use binary search
+
+------------------------------------- Trees -----------------------------------
+Trees are a new type of data structure
+Similar to linked lists but each elements are linked with pointers in a 
+hierarchical manner
+
+Binary Search Trees:
+Trees that are linked with pointers in a hierarchical manner that allow binary
+search where the root's left nodes are smaller elements while the root's right
+nodes are larger elements
+
+Defining a binary search tree:
+typedef struct node
+{
+    int number
+    struct node *left_node
+    struct node *right_node
+}
+node;
+
+
+Downsides to trees:
+1) Takes up more memory than linked lists (to store left and right node pointers)
+
+
+Tries:
+Tries are trees in which each node is an array 
+
+---------------------------------- Dictionaries -------------------------------
+Dictionaries are a new type of data structure
+Dictionaries are different from linked lists and trees where elements are stored
+with a key and a value 
+
+Hashing:
+----------------------------------- Hashing -----------------------------------
+The process of receiving an input value and producing a simpler output
+Hash functions are algorithms that implement hasing
+Hash tables are a new type of data structure which uses arrays and linked lists 
+
+-----------------------------------  -----------------------------------
+
+
+
+
+
+
+Sorting Algorithms sorts an array of elements
+
+Types of Algorithms for sorting:
+1) Selection Sort - sorting by finding smallest and place it accordingly
+2) Bubble Sort  - sorting by comparing 2 elements and swap places, repeat until sorted 
+3) Merge Sort - sorting 2 halves and compare the smallest element of each halve
+
+Selection Sort:
+Loops through the entire array, look for the smallest element and swap places
+with the first element of the unsorted part 
+
+Bubble Sort:
+Loops through the array constantly checking between 2 elements and swap places if
+the elements are in the wrong order, repeat this process until the array is sorted
+(generally moves high values to the right and low values to the left)
+
+Merge Sort:
+Sort 2 halves of the array, compare the smallest element of each halve, then
+get the smallest element and put it in a new array 
+
+
+-------------------------------- Running Time ---------------------------------
+All algorithms have a running time which represents roughly how fast / slow the algorithm is
+(represented by O)
+
+Slowest to Fastest running times:  
+O(n ^ 2) > O(n log n) > O(n) > O(log n) > O(1)          
+
+Linear search has a running time of O(n)
+Binary search has a running time of O(log n)
+
+Linear sort has a running time of O(n ^ 2) 
+Bubble sort has a running time of O(n ^ 2)           
+Bubble sort has a running time of O(n log n)         
 
 
 

@@ -6,6 +6,8 @@ void swap2(int *a, int *b);
 
 int main (void)
 {
+    // swap will not work but swap2 will. 
+    // swap uses pass by value while swap2 goes to the address to change the value (pass by reference)
     int x = 1;
     int y = 2;
 
