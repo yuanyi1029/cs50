@@ -3,6 +3,40 @@ Stacks and Queues are abstract data structures
 Stacks are Last In First Out (LIFO)
 Queues are First In First Out (FIFO)
 
+4 new data structures:
+1) Arrays
+2) Linked lists
+3) Hash tables (array of linked lists)
+4) Tries (trees of array nodes)
+
+Arrays:
+Bad insertion and deletion
+Good lookup (constant running time of O(1)) 
+Easy to sort
+Small size (takes up little memory)
+Fixed size, not flexible
+
+Linked lists:
+Good insertion and deletion 
+Bad lookup (can only use linear search with running time of O(n))
+Hard to sort
+Small size (but takes more memory than arrays)
+No fixed size, flexible
+
+Hash tables:
+Good insertion and deletion
+Good lookup (constant running time of O(1)) 
+Sorting is not required or ideal
+Big size 
+No fixed size, flexible
+
+Tries:
+Good insertion and deletion
+Good lookup (constant running time of O(1)) 
+Already sorted
+Big size
+No fixed size, flexible
+
 -------------------------------- Resizing Arrays ------------------------------ 
 2 ways to resize an array:
 1) Use realloc() to re-allocate a larger chunk of memory to store the larger array
@@ -50,6 +84,8 @@ Downsides to linked lists:
 1) Takes up more memory than arrays (to store the pointers)
 2) Unable to use indexing to get an element + Unable to use binary search
 
+Searching for an element in a linked list has a running time of O(n)
+ 
 ------------------------------------- Trees -----------------------------------
 Trees are a new type of data structure
 Similar to linked lists but each elements are linked with pointers in a 
@@ -73,172 +109,23 @@ node;
 Downsides to trees:
 1) Takes up more memory than linked lists (to store left and right node pointers)
 
+Searching for an element in a binary search tree has a running time of O(log n)
+     
 
 Tries:
 Tries are trees in which each node is an array 
+Searching for an element in a try has a running time of O(1)    (constant time)
 
 ---------------------------------- Dictionaries -------------------------------
 Dictionaries are a new type of data structure
 Dictionaries are different from linked lists and trees where elements are stored
-with a key and a value 
+with a key and value pair 
 
-Hashing:
 ----------------------------------- Hashing -----------------------------------
 The process of receiving an input value and producing a simpler output
 Hash functions are algorithms that implement hasing
-Hash tables are a new type of data structure which uses arrays and linked lists 
+Hash tables are a new type of data structure which is an array of linked lists 
+Searching for an element in a hash table has a running time of O(1)    (constant time)
 
------------------------------------  -----------------------------------
-
-
-
-
-
-
-Sorting Algorithms sorts an array of elements
-
-Types of Algorithms for sorting:
-1) Selection Sort - sorting by finding smallest and place it accordingly
-2) Bubble Sort  - sorting by comparing 2 elements and swap places, repeat until sorted 
-3) Merge Sort - sorting 2 halves and compare the smallest element of each halve
-
-Selection Sort:
-Loops through the entire array, look for the smallest element and swap places
-with the first element of the unsorted part 
-
-Bubble Sort:
-Loops through the array constantly checking between 2 elements and swap places if
-the elements are in the wrong order, repeat this process until the array is sorted
-(generally moves high values to the right and low values to the left)
-
-Merge Sort:
-Sort 2 halves of the array, compare the smallest element of each halve, then
-get the smallest element and put it in a new array 
-
-
--------------------------------- Running Time ---------------------------------
-All algorithms have a running time which represents roughly how fast / slow the algorithm is
-(represented by O)
-
-Slowest to Fastest running times:  
-O(n ^ 2) > O(n log n) > O(n) > O(log n) > O(1)          
-
-Linear search has a running time of O(n)
-Binary search has a running time of O(log n)
-
-Linear sort has a running time of O(n ^ 2) 
-Bubble sort has a running time of O(n ^ 2)           
-Bubble sort has a running time of O(n log n)         
-
-
-
-Data structures are a specialized way of storing and processing data 
-Arrays are a type of data structure that allows us to store data back-to-back
-Modern programming languages allows us to invent our own data structures
-
-Implementing a new data structure:
-    typedef struct
-    {
-        // variables
-    }
-    structure_name
-
-
-
-
-
-
-
-
-Hexadecimal format is a concise way to express memeory on a computer system
-represented with 0x at the front (0x10, 0xA6, 0xFF)
-Hexadecimal is base 16 where 2 hex digits can represent up to decimal of 255 or 8 bits (1 byte)
-0xFF = 11111111 = 255
-
-Operators related to memory:
-&           (Used to get the memory address of a variable)
-*           (Used to go to a memory address)
-
-Functions related to memory:
-malloc()    (Request a chunk of space)
-free()      (Free up the chunk of space when finished using it)
-scanf()     (Get input from the user)
-
-Examples:
-    int *p = &n
-
-    int *x = malloc(4)
-
-    int y;
-    printf("y: ")
-    scanf("%i", &y)
-
-p is an address variable (pointer) that stores the address of an integer variable n
-x in an address variable (pointer) than can point to 4 bytes of memory
-scanf gets the user input and stores it at the address of y 
-
------------------------------------ Pointers ---------------------------------- 
-Pointers are just addresses of variables 
-Pointers can be used to pass actual values of variables into functions (previously impossible)
-
-The '*' can also be used:
-1) To initialise a variable as a pointer
-    int *x = &10;
-2) To go to the reference and access the data
-    printf("%i\n",*x)     // Go to the address of x and print the value
-
-When not setting a pointer immediately, always set pointers to NULL first
-    int *x = NULL 
  
------------------------------ Pointers with strings --------------------------- 
-The variable that stores a string is just storing the address of the first character
-of that string. (Same with arrays as well)
 
-Therefore:
-string s = "HI"     is the same as     char *s = "HI!"
-
-Using arithmetic with pointers:    
-*s              // Go to memory address of s        
-*(s + 1)        // Go to the next memory address of s 
-
-Comparing strings:
-We cannot use "==" when comparing string variables because the 2 variables may
-have the same contents, but the variables have different addresses so it would 
-never be equal.
-Solution: Use strcmp(s,t) == 0
-    char *s = "HI!"
-    char *t = "HI!"
-    s == t              (false because s and t have different addresses) 
-
-Copying strings:
-When assigning a variable to a string, that variable only stores a copy of 
-the string's address where changing one of s or t will result in changes in both
-    char *s = "HI!"     (s stores the address of the first character of "HI!")
-    char *t = s         (t makes a copy of s which is just the address of "HI!")
-Solution: Use malloc() from stdlib library to get a chunk of space and strcpy() 
-          to copy the string
-    char *s = "HI!"
-    char *t = malloc(4)  // 4 because we need \0 at the end (HI!\0)
-    strcpy(t, s)
-
------------------------------- Pointers with Files ---------------------------- 
-Initialise a variable as a file pointer with FILE * 
-
-File functions:
-fopen()     // Opens a file
-fclose()    // Close a file 
-fgetc()     // Reads and returns the next character of the pointed file
-fputc()     // Writes or appends a character to the pointed file
-fread()     // Reads a number of units of a certain size from a certain file and
-            // stores them in a buffer (usually an array)
-fwrite()    // Writes a number of units of a certain size from a certain file from
-            // a buffer (usually an array)
-Example:
-FILE *my_file = fopen(filename, "r")        // "r" is the operation to read the file only
-fclose(file_pointer)                        // Close the file
-char y = fgetc(file_pointer)                // get the next character of a file, store it in y
-fputc('A', file_pointer)                    // Write 'A' to a file
-fread(array, sizeof(int), 10, file_pointer) // Read from file of 40 bytes (4 x 10 times) and 
-                                            // store it into an array
-fwrite(array, sizeof(int), 10, file_pointer)// Write 40 bytes (4 x 10 times) into a file of 
-                                            // from the array 
