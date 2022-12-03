@@ -20,7 +20,7 @@ Data types: char, double, float, int, long, string, bool
 (string and bool are only provided by cs50)
 string name = David;
 int counter = 0;
-const string animal = cat;      // use const for variables that done change (constant)
+const string animal = cat;      // use const for variables that don't change (constant)
 
 Conditionals:
     if (x < y)

@@ -1,0 +1,50 @@
+------------------------------ Python Programming -----------------------------
+Compiling code in python with python interpreter:
+python filename
+
+Printing, Concatenation, and String formatting:
+print("hello world")
+print("hello " + answer)    OR    print("hello", answer);
+print(f"hello {answer}")
+
+Data types: bool, float, int, str
+Data structures: range, list, tuple, dict, set
+
+Conditionals:
+    if x < y:
+        # function (do something)
+    elif x > y :
+        # function (do something)
+    else:
+        # function (do something)
+
+Loops:
+    counter = 0
+    while counter < 3:
+        # function (do something)
+        counter += 1
+
+    for i in range(3):
+        # function (do something)
+
+Functions:
+    def function_name(arguments)
+    {
+        # function (do something)
+    }
+
+---------------------------- Command Line Arguments ---------------------------
+Command line arguments are arguments that are collected at the terminal before 
+the program runs
+
+Similar to C programming, python can accept command line arguments with the sys module 
+
+To accept Command line arguments, import argv from the sys module:
+    from sys import argv
+
+    if len(argv) == 2:
+        # function (do something)
+
+where argv is a list of arguments
+
+----------------------------- Regular expressions -----------------------------
