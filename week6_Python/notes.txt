@@ -47,4 +47,33 @@ To accept Command line arguments, import argv from the sys module:
 
 where argv is a list of arguments
 
------------------------------ Regular expressions -----------------------------
+-------------------------------- Reading Files --------------------------------
+Opening and closing files:
+1) Use open() and close() function 
+    file = open(filename, "r")
+    # function (do something)
+    file.close()
+
+2) Use with() function  
+    with open(filename, "r") as file:
+        # function (do something)   
+Note: Using the with() function will close the file automatically
+
+Reading files:
+1) Use read() function
+    data = file.read()
+    # function (do something)
+Note: Using the read() function will represent each row as a string
+
+2) Use reader() function from the csv module
+    import csv 
+    data = csv.reader(file)
+    # function (do something)
+Note: Using the reader() function will represent each row as a list 
+
+Reading csv files into a list of dictionaries: 
+1) Use DictReader() function from the csv module and list() function
+    import csv 
+    reader = csv.DictReader(file)
+    data_list = list(reader)
+

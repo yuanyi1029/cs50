@@ -1,0 +1,49 @@
+----------------------------------- Database ----------------------------------
+A database is large organized collection of data stored in a computer
+
+Types of databases:
+1) Flat file databases
+Flat file databases are databases that stores data in a single sheet 
+
+2) Relational databases 
+Relational databases are databases that stores data in rows or columns
+
+
+------------------------------------- SQL -------------------------------------
+SQL stands for Structured Query Language used for storing, updating, inserting,
+deleting data in a database
+SQL provide 4 main operations on a table: 
+1) Insert 
+2) Select
+3) Update 
+4) Delete
+
+Creating a table:
+    CREATE TABLE tablename (column type, ...);
+
+Selecting columns:
+    SELECT columns FROM table;
+    SELECT * FROM table;
+Selection functions:
+    AVG         MIN
+    COUNT       MAX
+    LOWER       DISTINCT
+    UPPER
+Selection conditions:
+    WHERE       GROUP BY
+    LIKE        LIMIT
+    ORDER BY
+Examples:
+    SELECT COUNT(*) FROM table WHERE condition='something';
+    SELECT MAX(*) FROM table; 
+
+Inserting data:
+    INSERT INTO table (column, ...) VALUES (value, ...);
+
+Updating data:
+    UPDATE table SET column = value WHERE condition;
+
+Deleting data:
+    DELETE FROM table WHERE condition;
+
+-------------------------------- SQL in Python --------------------------------
