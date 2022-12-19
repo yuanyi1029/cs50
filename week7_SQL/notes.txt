@@ -45,5 +45,3 @@ Updating data:
 
 Deleting data:
     DELETE FROM table WHERE condition;
-
--------------------------------- SQL in Python --------------------------------

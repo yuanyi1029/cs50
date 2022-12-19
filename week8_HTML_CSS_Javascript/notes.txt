@@ -1,0 +1,56 @@
+----------------------------------- Internet ----------------------------------
+The internet are just computers connected to each other to transmit data using 
+routers
+
+
+TCP/IP (Transmission Control Protocol / Internet Protocol)
+A set of standardized rules that allow computers to communicate on a network
+1) Transmission control protocol is a protocol that assigns unique numbers to 
+   different services on the internet (port numbers) 
+   Example: 80 for http, 443 for https 
+2) Internet protocol is a protocol that dictates every device on the internet 
+   has a unique address of #.#.#.# where each # can range from 0 to 255 
+   (8 bits used per #)
+
+DNS (Domain Name System)
+A collection of servers on the internet that converts domain names into IP 
+addresses (Can be a large servers or company servers or even just a home router)
+
+HTTP (Hypertext Transfer Protocol)
+A set of standardized rules on the application level used to communicate with web
+servers on the internet
+
+Messages that are sent across the internet will start with GET or POST
+Example Request:
+GET / HTTP/1.1
+Host: www.example.com
+
+Example Response:
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+----------------------- Hypertext Markup Language (HTML) ----------------------
+Markup language used to make webpages (Not a programming language)
+A HTML webpage code is just made up of tags and attributes
+Example:
+   <html lang="en">
+      <!-- content -->
+   </html>
+<html> and </html> are opening and closing tags
+lang="en" is an attribute that modifies the <html> tag
+
+------------------------- Cascading Style Sheets (CSS) ------------------------
+Markup language used to style and format webpage content (Not a programming language)
+A CSS style sheet code is made up of key value pairs 
+Example:
+   body {
+      text-align: center;
+   }
+   header {
+      font-size: large;
+   }
+   .medium {
+      font-size: medium;
+   }
+body and header defines attributes for the <body> and <header> tags respectively
+while .medium defines attributes for the "medium" class
