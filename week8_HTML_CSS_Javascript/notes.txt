@@ -12,9 +12,14 @@ A set of standardized rules that allow computers to communicate on a network
    has a unique address of #.#.#.# where each # can range from 0 to 255 
    (8 bits used per #)
 
+Dynamic Host Configuration Protocol (DHCP)
+A set of standardized rules used to dynamically assign an IP address to any device,
+done by a DHCP server on the internet
+
 DNS (Domain Name System)
-A collection of servers on the internet that converts domain names into IP 
-addresses (Can be a large servers or company servers or even just a home router)
+A specified system on the internet that converts domain names into IP 
+addresses, done by a collection of DNS servers on the internet (Can be a large 
+servers or company servers or even just a home router)
 
 HTTP (Hypertext Transfer Protocol)
 A set of standardized rules on the application level used to communicate with web
@@ -30,7 +35,7 @@ HTTP/1.1 200 OK
 Content-Type: text/html
 
 ----------------------- Hypertext Markup Language (HTML) ----------------------
-Markup language used to make webpages (Not a programming language)
+Markup language used to make webpages (Not a programming l anguage)
 A HTML webpage code is just made up of tags and attributes
 Example:
    <html lang="en">
