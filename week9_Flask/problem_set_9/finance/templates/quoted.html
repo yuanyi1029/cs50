@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <h2>A single stock of {{ stock_dict["name"] }} ({{ stock_dict["symbol"]  }}) costs {{ stock_dict["price"] }} USD</h2>
+{% endblock %}

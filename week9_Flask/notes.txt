@@ -1,0 +1,43 @@
+------------------------------------ Flask ------------------------------------
+Backend python framework used to make web applications
+app.py file and templates/ folder must be present to be able to run flask
+
+Implementing a web server:
+   from flask import Flask, render_template, request
+   app = Flask(__name__)
+
+   @app.route("/")
+   def index():
+      return render_template("index.html")
+
+
+------------------------------------ Jinja ------------------------------------
+Special placeholder syntax
+
+Placeholders for variables in HTML:
+   <body>hello, {{ name }}</body>
+
+----------------------------------- Sessions ----------------------------------
+A session are server side files that contain user data to remember what the user
+has done on a website 
+The browser will plant cookies into a device to mantain a session
+
+Example:
+Having a session on gmail will allow the user to access emails without logging
+in again
+
+Example Response that plants a cookie:
+HTTP/1.1 200 OK
+Content-Type: text/html
+Set-Cookie: session=value
+
+Example Request that contains a cookie:
+GET / HTTP/1.1
+Host: www.example.com
+Cookie: session=value
+
+
+
+
+
+
