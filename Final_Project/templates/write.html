@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Write Review
+{% endblock %}
+
+{% block main %}
+    <h2>Review a Movie</h2>
+    <br>
+    <form action="/write" method="post">
+    {% if not title %}
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="title" name="title" placeholder="Movie Title" type="text">
+        </div>
+    {% else %}
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="title" name="title" placeholder="Movie Title" value="{{ title }}"type="text">
+        </div>
+    {% endif %}
+
+        <div class="mb-3">
+            <input autocomplete="off" type="radio" id="option1" name="type" value="movie">
+            <label for="option1" title="text">Movie</label>
+            <input autocomplete="off" type="radio" id="option2" name="type" value="tv show">
+            <label for="option2" title="text">TV Show</label>
+        </div>
+        <div class="mb-3">
+            <input autocomplete="off" type="radio" id="star1" name="rating" value="1">
+            <label for="star1" title="text">1 star</label>
+            <input autocomplete="off" type="radio" id="star2" name="rating" value="2">
+            <label for="star2" title="text">2 stars</label>
+            <input autocomplete="off" type="radio" id="star3" name="rating" value="3">
+            <label for="star3" title="text">3 stars</label>
+            <input autocomplete="off" type="radio" id="star4" name="rating" value="4">
+            <label for="star4" title="text">4 stars</label>
+            <input autocomplete="off" type="radio" id="star5" name="rating" value="5">
+            <label for="star5" title="text">5 stars</label>
+        </div>
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" id="review" name="review" placeholder="Comments and Review" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Post Review</button>
+    </form>
+
+{% endblock %}

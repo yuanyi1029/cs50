@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block main %}
+    <h2>Search Results</h2>
+    <br>
+    <main class="container py-5 text-center">
+        {% if not row_list %}
+            <h3>No Results Found</h3>
+        {% else %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-start">Movie</th>
+                        <th class="text-start">Type</th>
+                        <th class="text-start">Number of Ratings</th>
+                        <th class="text-end">Average Rating</th>
+                        <th class="text-end"></th>
+                        <th class="text-end"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in row_list %}
+                    <tr>
+                        <td class="text-start">{{ row["title"] }}</td>
+                        <td class="text-start">{{ row["type"] }}</td>
+                        <td class="text-start">{{ row["ratings"] }}</td>
+                        <td class="text-end">{{ row["avg_rating"] }}</td>
+                        <!-- <td class="text-end"><a href="write"></a></td> -->
+                        <form action="/searched" method="post">
+                            <td><button name="view" value= "{{ row["title"] }}" type="submit">View Reviews</button></td>
+                            <td><button name="write" value= "{{ row["title"] }}" type="submit">Write Review</button></td>
+                        </form>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </main>
+{% endblock %}

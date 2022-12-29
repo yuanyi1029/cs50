@@ -10,15 +10,19 @@ Implementing a web server:
    def index():
       return render_template("index.html")
 
-
 ------------------------------------ Jinja ------------------------------------
-Special placeholder syntax
+Special placeholder syntax to have python code in a HTML file
 
 Placeholders for variables in HTML:
    <body>hello, {{ name }}</body>
 
+Placeholders for python loops in HTML:
+   {% for i in loop %}
+      <!-- content -->
+   {% endfor %}
+
 ----------------------------------- Sessions ----------------------------------
-A session are server side files that contain user data to remember what the user
+A session is server side files that contain user data to remember what the user
 has done on a website 
 The browser will plant cookies into a device to mantain a session
 
@@ -35,9 +39,3 @@ Example Request that contains a cookie:
 GET / HTTP/1.1
 Host: www.example.com
 Cookie: session=value
-
-
-
-
-
-

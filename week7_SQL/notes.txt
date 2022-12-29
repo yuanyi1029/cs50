@@ -21,22 +21,6 @@ SQL provide 4 main operations on a table:
 Creating a table:
     CREATE TABLE tablename (column type, ...);
 
-Selecting columns:
-    SELECT columns FROM table;
-    SELECT * FROM table;
-Selection functions:
-    AVG         MIN
-    COUNT       MAX
-    LOWER       DISTINCT
-    UPPER
-Selection conditions:
-    WHERE       GROUP BY
-    LIKE        LIMIT
-    ORDER BY
-Examples:
-    SELECT COUNT(*) FROM table WHERE condition='something';
-    SELECT MAX(*) FROM table; 
-
 Inserting data:
     INSERT INTO table (column, ...) VALUES (value, ...);
 
@@ -45,3 +29,25 @@ Updating data:
 
 Deleting data:
     DELETE FROM table WHERE condition;
+
+Selecting columns:
+    SELECT columns FROM table;
+    SELECT * FROM table;
+
+Selection functions:
+    AVG         MIN
+    COUNT       MAX
+    LOWER       DISTINCT
+    UPPER
+
+Selection conditions:
+    WHERE       GROUP BY
+    LIKE        LIMIT
+    ORDER BY
+
+Examples:
+    CREATE TABLE users(id INTEGER, name TEXT, age INTEGER);
+    INSERT INTO users(id, name, age) VALUES (1, Ben, 19);
+    UPDATE users SET age = 20 WHERE name="Ben";
+    DELETE FROM users WHERE name="Ben";
+    SELECT * FROM users WHERE id=1;
