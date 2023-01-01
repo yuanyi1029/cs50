@@ -1,0 +1,27 @@
+------------------------------------ HTML -------------------------------------
+Markup Language used to describe the structure of a webpage
+A HTML webpage code is just made up of tags and attributes
+
+Example:
+   <html lang="en">
+      <!-- content -->
+   </html>
+<html> and </html> are opening and closing tags
+lang="en" is an attribute that modifies the <html> tag
+
+
+HTML elements (represented in tags) are structured in a tree-like structure
+called Document Object Model (DOM). The DOM describes how each element are related
+to each other
+HTML Document Object Model (Based on 001_hello.html):
+            html tag
+    head tag        body tag
+    title tag       Hello, world!
+    Hello
+
+
+
+
+
+
+------------------------------------- CSS -------------------------------------
