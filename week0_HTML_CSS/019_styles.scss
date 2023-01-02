@@ -1,0 +1,23 @@
+$color: red;
+
+ul {
+    font-size: 14px;
+    color: $color;
+}
+
+ol {
+    font-size: 18px;
+    color: $color;
+}
+
+// CSS nesting is easier in Sass 
+// CSS equivalent of nesting: Descendant Selectors (a > b)
+div {
+    font-size: 18px;
+    p {
+        color: blue;
+    }
+    ul {
+        color: green;
+    }
+}

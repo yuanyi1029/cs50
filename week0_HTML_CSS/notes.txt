@@ -19,9 +19,67 @@ HTML Document Object Model (Based on 001_hello.html):
     title tag       Hello, world!
     Hello
 
-
-
-
-
-
 ------------------------------------- CSS -------------------------------------
+Markup language used to style and format webpage content in which the CSS style
+sheet code gives properties to HTML elements
+HTML elemenets can also get style properties from parent elements based on the 
+Document Object Model (DOM)
+
+Example:
+   body {
+      text-align: center;
+   }
+   header {
+      font-size: large;
+   }
+   .medium {
+      font-size: medium;
+   }
+body and header defines attributes for the <body> and <header> tags respectively
+while .medium defines attributes for the "medium" class
+
+------------------------- CSS Selectors & Precendence -------------------------
+CSS have different types of selectors when choosing HTML elements to style
+CSS Selectors:
+a, b                 (Multiple Element Selector)
+a  b  OR  a > b      (Descendant Selector)(At 013_descendant.html)
+a[attribute=""]      (Attribute Selector)(At 014_attribute.html)
+a:b                  (Pseudoclass Selector)(At 015_hover.html)
+
+
+CSS Selecity Precendence is required because different CSS style selectors may 
+reference the same element
+Example: 
+   h1 {
+      color: red;
+   }
+   #foo {
+      color: blue;
+   }
+   <h1 id="foo">Hello World</h1>
+How does "Hello World" get styled? Both h1 and foo are selected by CSS style 
+selectors. (Answer: CSS Selecity Precedence is required)
+
+CSS Selecity Precedence:
+1. Inline styling    (Directly adding style="" to HTML elements)
+2. Id styling        (Adding id="" to HTML elements)
+3. Class styling     (Adding class="" to HTML elements)
+4. Type styling      (Styling by the type of the HTML element)
+
+---------------------------------- Bootstrap ----------------------------------
+Pre-written CSS code (Called a library) used to style and format webpage content 
+so users do not need to style webpages from scratch
+Bootstrap v5.3 documentation: https://getbootstrap.com/docs/
+
+------------------------------------ Sass -------------------------------------
+Syntactically Awesome Style Sheets (Sass) is an extension to CSS Markup Language
+that adds additional features to CSS to make it more powerful
+
+Advantages:
+Sass allows CSS to have variables
+Sass makes CSS nesting easier to implement
+Sass makes CSS inheritance easier to implement
+
+Disadvantages:
+Computers do not understand sass stylesheet files, a compiler is needed to convert
+scss files into css files
