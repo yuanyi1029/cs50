@@ -1,0 +1,59 @@
+html {
+    padding: 20px;
+}
+
+ul {
+    list-style-type: none;
+    overflow: hidden;
+}
+
+ul > li {
+    display: inline;
+    float: right;
+    padding: 14px;
+}
+
+main {
+    text-align: center;
+    padding-top: 200px;
+}
+
+#google-heading {
+    font-size: 100px;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+#search-bar {
+    height: 50px;
+    width: 600px;
+    padding: 15px;
+    border-radius: 30px;
+}
+
+.form-input {
+    width: 600px;
+}
+
+#advanced {
+    text-align: left;
+    padding-top: 0px;
+    padding-left: 20px;
+}
+
+.blue
+{
+    color: #4285F4;
+}
+.red
+{
+    color: #DB4437;
+}
+.yellow
+{
+    color: #F4B400;
+}
+.green
+{
+    color: #0F9D58;
+}
