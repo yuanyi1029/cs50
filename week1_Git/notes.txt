@@ -1,0 +1,54 @@
+------------------------------------- Git -------------------------------------
+Version control tool used in the command line
+
+Functions of Git:
+1) Keep track of changes to code
+2) Synchronize code between different people
+3) Test changes to code without losing the original code
+4) Revert back to old versions of code 
+
+Git commands:
+git clone <url>           Takes a repository on the internet and downloads it
+git add <filename>        Adds a file for git to track the next time a commit happens 
+git commit -m "message"   Keeps track of the changes of the added files, saves them as snapshots
+git push                  Pushes the changes in the local repository up to the server 
+git status                Informs the user on what is currently happening in the repository   
+git pull                  Downloads the latest version of the repository
+git log                   Shows all the changes that were made in a repository 
+git reset --hard <commit> Reverts the current state of a repository to an older state
+
+Merge conflicts happens when 2 users make changes in the same part of code 
+
+---------------------------------- Branching ----------------------------------
+Git Branches allows working on different parts of a repository at the same time
+Git branches can be merged together once each of the branches are completed
+
+Repositories may have these branches: 
+1) Main branch (Default branch. Contains updated, stable version of the code)
+2) Feature branch (Non-default branch. May contain code for new features)
+
+Git commands for branching:
+git branch                Shows all the available branches in a repository
+git checkout -b <name>    Creates a new branch and switches to it
+git checkout master       Switches to the master branch
+git merge <name>          Merges a branch to the master branch                 
+
+----------------------------- Forking Repositories ----------------------------
+Git feature that allows users to copy a repository into their accounts which enables
+users to clone the forked repository into their computer and make changes
+
+A pull request can be sent to the owner when sizeable changes have been made
+
+The owner can review the proposed changes and merge the user's code with the original
+repository source code 
+
+----------------------------------- Github ------------------------------------
+Website that stores Git repositories
+
+-------------------------------- Github Pages ---------------------------------
+Free Github service that allows users to deploy their website onto the internet 
+
+Required repository name for Github pages:
+username.github.io
+
+
