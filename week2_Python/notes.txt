@@ -34,6 +34,14 @@ Functions:
 Lambda Functions:
     lambda argument: return_value
 
+Catching Exceptions:
+    try:
+        # function (do something)
+    except error_type:
+        # function (do something)
+    except another_error_type:
+        # function (do something)
+    
 Object Oriented Programming:
     class class_name(arguments):
         def __init__(self, arguments):
