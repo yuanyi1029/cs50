@@ -29,9 +29,7 @@ Loops:
 
 Functions:
     def function_name(arguments)
-    {
         # function (do something)
-    }
 
 ---------------------------- Command Line Arguments ---------------------------
 Command line arguments are arguments that are collected at the terminal before 

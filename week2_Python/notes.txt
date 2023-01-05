@@ -1,0 +1,44 @@
+------------------------------ Python Programming -----------------------------
+Compiling code in python with python interpreter:
+python filename
+
+Printing, Concatenation, and String formatting:
+print("hello world")
+print("hello " + answer)    OR    print("hello", answer);
+print(f"hello {answer}")
+
+Data types: bool, float, int, str, NoneType
+Data structures: range, list, tuple, dict, set
+
+Conditionals:
+    if x < y:
+        # function (do something)
+    elif x > y :
+        # function (do something)
+    else:
+        # function (do something)
+
+Loops:
+    counter = 0
+    while counter < 3:
+        # function (do something)
+        counter += 1
+
+    for i in range(3):
+        # function (do something)
+
+Functions:
+    def function_name(arguments):
+        # function (do something)
+
+Lambda Functions:
+    lambda argument: return_value
+
+Object Oriented Programming:
+    class class_name(arguments):
+        def __init__(self, arguments):
+            # function (do something)
+
+        def function(self, arguments):
+            # function (do something)
+
