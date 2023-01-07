@@ -1,0 +1,21 @@
+------------------------------------ Django -----------------------------------
+Python web framework that enables the creation of dynamic web applications with
+python 
+
+Terminal commands related to Django:
+pip install Django
+django-admin startproject <project_name>
+python manage.py runserver
+python manage.py startapp <app_name>
+
+
+Important pre-created files in a Django project:
+1) manage.py        Used to execute commands on a django project
+2) settings.py      Contains important configurations for a django project
+3) urls.py          Contains all the routes for the web application in a django project
+
+Note: A Django project can contain many Django applications 
+
+Important pre-created files in a Django application:
+1) views.py         Used to define what the user sees when visiting a specific route
+
