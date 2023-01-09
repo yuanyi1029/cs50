@@ -1,0 +1,151 @@
+------------------------------------- SQL -------------------------------------
+Database language designed to interact with relational databases management systems 
+
+Example database management systems:
+1) MySQL
+2) PostgreSQL
+3) SQLite (Django's default)
+
+SQLite Data Types:
+TEXT           BLOB
+NUMERIC        CHAR
+INTEGER        FLOAT
+REAL           DOUBLE
+
+--------------------------------- SQL Queries ---------------------------------
+Creating a table:
+    CREATE TABLE tableName (
+        columnName dataType constraints,
+        columnName dataType constraints,
+        ...
+    );
+
+    Constraint Types:
+        CHECK           PRIMARY KEY
+        DEFAULT         UNIQUE
+        NOT NULL
+
+Inserting data:
+    INSERT INTO tableName 
+        (columnName, columnName, columnName) 
+        VALUES (value, value, value);
+
+Retrieving data:
+    SELECT columnName, columnName FROM tableName WHERE condition;
+
+Updating data:
+    UPDATE tableName SET columnName = value WHERE condition;
+
+Deleting data:
+    DELETE FROM tableName WHERE condition;
+
+Joining tables:
+    SELECT columnName, columnName, columnName, 
+    FROM tableOneName JOIN tableTwoName 
+    ON tableOneName.primaryKey = tableTwoName.foreignKey
+
+----------------------------------- Models ------------------------------------
+Each application in a Django project has a pre-created file called models.py which
+consists of python classes that represent data that Django should store in a database
+
+Example Model in a models.py file that represents required data in a database:
+    from django.db import models
+
+    class Flight(models.Model):
+        origin = models.CharField(max_length=64)
+        destination = models.CharField(max_length=64)
+        duration = models.IntegerField()
+
+
+2 more steps needed to implement a Model
+1) Create Migration  (Creating instructions on how to manipulate the database)
+    python manage.py makemigrations
+2) Migrate           (Executing the instructions and apply them to the database)
+    python manage.py migrate
+
+-------------------------------- Django Admin ---------------------------------
+Django application that is pre-created for the manipulation of models
+To use the Django admin application, an admin account needs to be created and
+the models should be added to the admin.py file 
+
+Create Django admin account: 
+python manage.py createsuperuser
+
+Adding models to admin.py file:
+admin.site.register(modelName)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+----------------------------------- Database ----------------------------------
+A database is large organized collection of data stored in a computer
+
+Types of databases:
+1) Flat file databases
+Flat file databases are databases that stores data in a single sheet 
+
+2) Relational databases 
+Relational databases are databases that stores data in rows or columns
+
+
+------------------------------------- SQL -------------------------------------
+SQL stands for Structured Query Language used for storing, updating, inserting,
+deleting data in a database
+SQL provide 4 main operations on a table: 
+1) Insert 
+2) Select
+3) Update 
+4) Delete
+
+Creating a table:
+    CREATE TABLE tablename (column type, ...);
+
+Inserting data:
+    INSERT INTO table (column, ...) VALUES (value, ...);
+
+Updating data:
+    UPDATE table SET column = value WHERE condition;
+
+Deleting data:
+    DELETE FROM table WHERE condition;
+
+Selecting columns:
+    SELECT columns FROM table;
+    SELECT * FROM table;
+
+Selection functions:
+    AVG         MIN
+    COUNT       MAX
+    LOWER       DISTINCT
+    UPPER
+
+Selection conditions:
+    WHERE       GROUP BY
+    LIKE        LIMIT
+    ORDER BY
+
+Examples:
+    CREATE TABLE users(id INTEGER, name TEXT, age INTEGER);
+    INSERT INTO users(id, name, age) VALUES (1, Ben, 19);
+    UPDATE users SET age = 20 WHERE name="Ben";
+    DELETE FROM users WHERE name="Ben";
+    SELECT * FROM users WHERE id=1;

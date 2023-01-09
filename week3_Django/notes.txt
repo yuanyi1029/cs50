@@ -2,28 +2,28 @@
 Python web framework that enables the creation of dynamic web applications with
 python 
 
-Terminal commands related to Django:
+Terminal Commands Related to Django:
 pip install Django
 Django-admin startproject <project_name>
 python manage.py runserver
 python manage.py startapp <app_name>
 
 
-Important pre-created files in a Django project:
+Important Pre-reated Files in a Django Project:
 1) manage.py        Used to execute commands on a Django project
 2) settings.py      Contains important configurations for a Django project
 3) urls.py          Contains all the routes for the web application in a Django project
 
 Note: A Django project can contain many Django applications 
 
-Important pre-created files in a Django application:
+Important Pre-created Files in a Django Application:
 1) views.py         Used to define what the user sees when visiting a specific route
 
 ------------------------------------ Routes -----------------------------------
 A urls.py file should be created in each application in a Django project to 
 define all the routes for that specific application
 
-Example urls.py file in a Django application:
+Example urls.py File in a Django Application:
     from django.urls import path
     from . import views
 
@@ -37,13 +37,13 @@ Example urls.py file in a Django application:
 Each application in a Django project has a pre-created file called views.py which
 consists of python functions that define what the user sees when visiting a specific route
 
-Example view in a views.py file that returns a HTTP Response:
+Example View in a views.py file that returns a HTTP Response:
     from django.http import HttpResponse
 
     def index(request):
         return HttpResponse("Hello, world!")
 
-Example view in a views.py file that returns a HTML page:
+Example View in a views.py file that returns a HTML page:
     from django.shortcuts import render
 
     def index(request):
@@ -65,7 +65,7 @@ Example view in a views.py file that provide extra context to a HTML page:
 Forms can be created within Django as python classes in the views.py file and passed
 into a HTML page from a view
 
-Example form created within Django:
+Example Form Created Within Django:
     from django import forms
     from django.shortcuts import render
 
@@ -80,30 +80,30 @@ Example form created within Django:
 ------------------------------------ Jinja ------------------------------------
 Special placeholder syntax to have python code in a HTML file
 
-Placeholders for variables in HTML:
+Placeholders for Variables in HTML:
    <body>hello, {{ name }}</body>
 
-Placeholders for loops in HTML:
+Placeholders for Loops in HTML:
    {% for i in loop %}
         <!-- content -->
    {% endfor %}
 
-Placeholders for conditional statements in HTML:
+Placeholders for Conditional Statements in HTML:
     {% if True %}
         <!-- content -->
     {% else %}
         <!-- content -->
     {% endif %}
 
-Inheriting layouts in HTML:
+Inheriting Layouts in HTML:
     {% extends "layout.html" %}
 
     {% block body %}
         <!-- content -->
     {% endblock %}
  
-Placeholders for static file locations in HTML:
+Placeholders for Static File Locations in HTML:
     <link href="{% static 'styles.css' %}" rel="stylesheet">
 
-Placeholders for redirecting file locations in HTML:
+Placeholders for Redirecting File Locations in HTML:
     <a href="{% url 'index' %}">Go to Index Page</a>
