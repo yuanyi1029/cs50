@@ -1,0 +1,50 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+    <h2>Categories</h2>
+
+    <form action="{% url 'categories' %}" method="post">
+        {% csrf_token %} 
+        <select name="category" id="category" class="form-select">
+            <option disabled selected>Select a Category</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Technology">Technology</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Household">Household</option>
+            <option value="Children">Children</option>
+            <option value="Food & Beverage">Food & Beverage</option>
+            <option value="Health & Wellness">Health & Wellness</option>
+            <option value="Others">Others</option>
+        </select>
+        <input class="btn btn-primary" type="submit" value="Search">
+    </form>
+    <br>
+
+    {% if listings %}
+        <h2>Search Results</h2>
+        {% for listing in listings %}
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-2 col-lg-2 col-md-2">
+                        <img height="200px" width="200px" src="{{ listing.image_url }}" alt="{{ listing.item }}" class="img-fluid">
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6">
+                        <h2><b>{{ listing.item }}</b></h2>
+                        <h3><b>Price: ${{ listing.price }}</b></h3>
+                        <p>Created on: {{ listing.time }}</p>
+                        <a class="btn btn-primary" href="listing/{{ listing.id }}" role="button">View Listing</a>
+                    </div>
+                </div>
+            </div>        
+        {% endfor %}
+    {% else %}
+        <h2>No Listings Found</h2>
+    {% endif %}
+{% endblock %}
+
+
+
+
+
+
