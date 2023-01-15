@@ -12,6 +12,35 @@ Example:
         // function (do something) 
     </script>
 
+The "document.querySelector()" function to looks for tags, ids and classes in a 
+HTML webpage 
+Examples:
+    const h1 = document.querySelector("h1")             // Returns the first h1 tag
+    const p = document.querySelectorAll("p")            // Returns all the p tags 
+    const name1 = document.querySelector("#name")       // Returns the first name id 
+    const name2 = document.querySelectorAll(".name")    // Returns all the name classes
+
+The "document.addEventListener()" function to listen for specific events 
+Example:
+    document.addEventListener("DOMContentLoaded", function() {
+        // function (do something)
+    });
+
+Event Listeners can also be added onto Query Selectors
+Examples:
+    document.querySelector("form").onsubmit = function() {
+        // function (do something)
+    };
+    document.querySelector("button").onclick = function() {
+        // function (do something)
+    };
+    document.querySelector("select").onchange = function() {
+        // function (do something)
+    };
+
+Note: onsubmit, onclick, onchange are Event Listeners added to Query Selectors 
+
+
 ------------------- Application Programming Interface (API) -------------------
 Well defined structured way for services on the internet to communicate with each
 other
