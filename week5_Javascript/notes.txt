@@ -1,0 +1,26 @@
+---------------------------------- Javascript ----------------------------------
+Client side programming language that enables interactive webpages by directly 
+manipulating the Document Object Model (DOM) on a client's computer
+
+Javascript is good at Event Driven Programming, which is programming based on 
+events that happen on the web in which it responds to events by using event 
+listeners and handlers 
+
+A Javascript code is added into a HTML webpage code with <script> tags
+Example:
+    <script>
+        // function (do something) 
+    </script>
+
+------------------- Application Programming Interface (API) -------------------
+Well defined structured way for services on the internet to communicate with each
+other
+Application Programming Interfaces (APIs) often transfer data in Javascript objects,
+specifically in Javascript Object Notation (JSON)
+
+Example JSON syntax:
+   {
+      "key": value,
+      "key": value,
+      "key": value
+   }
