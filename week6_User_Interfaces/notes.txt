@@ -1,0 +1,66 @@
+----------------------- Scroll Detection with Javascript ----------------------
+window.innerWidth           // Represents the width of a window
+window.innerHeight          // Represents the height of a window
+window.scrollY              // Represents the amount of pixels that was scrolled down
+document.body.offsetHeight  // Represents the height of the entire document
+
+Detecting if a user has scrolled down to the bottom of a page:
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+        // function (do something)
+    }
+
+----------------------------- Animations with CSS -----------------------------
+Size increase animation for HTML elements:
+    @keyframes grow {
+        from {
+            font-size: 20px;
+        }
+        to {
+            font-size: 100px;
+        }
+    }
+
+    h1 {
+        animation-name: grow;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+
+Hide blur animation for HTML elements:
+    @keyframes grow {
+        from {
+            opacity: 1;
+        }
+        to {
+            opacity: 0;
+        }
+    }
+
+    h1 {
+        animation-name: hide;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+    }
+
+------------------------------------ React ------------------------------------
+Pre-written Javascript code (called a library) used to design more interactive 
+user interfaces
+React applications are made up of components, in which a component is just a part
+of a web application
+
+3 Javascript packages required to get React working:
+1) React
+2) ReactDOM
+3) Babel 
+
+Declaring a React component:
+    function App() {
+        return (
+            <!-- content -->
+        );
+    }
+
+Rendering a React component into a HTML page:
+    ReactDOM.render(<App />, document.querySelector("#app"));
+
+
