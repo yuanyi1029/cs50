@@ -42,16 +42,16 @@ function load_mailbox(mailbox) {
   fetch(`/emails/${mailbox}`)
   .then(response => response.json())
   .then(emails => {
-      console.log(emails);
+      // console.log(emails);
 
       emails.forEach(email => {
-        console.log(email);
+        // console.log(email);
         const div = document.createElement('div');
         div.setAttribute("class", "row");
         div.setAttribute("id", "email-list");
         div.innerHTML = `
-          <h2 class="col-4"><b>${email.sender}</b></h2>
-          <h3 class="col-6">${email.subject}</h3>
+          <h4 class="col-4"><b>${email.sender}</b></h4>
+          <h4 class="col-6">${email.subject}</h4>
           <h6 class="col-2">${email.timestamp}</h6>
         `;
 
@@ -62,22 +62,75 @@ function load_mailbox(mailbox) {
           div.style.backgroundColor = "white";
         }
 
+        // console.log(email);
         div.addEventListener('click', () => {
-          console.log(`${email.id} has been clicked`)
-          load_email(`${email.id}`);
+          fetch(`/emails/${email.id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+              read: true
+            })
+          });
+          // console.log(email);
+          load_email(mailbox, email);
         })
 
         document.querySelector('#emails-view').append(div);
       });
-  });
+    });
 }
 
-function load_email(email_id) {
+function load_email(mailbox, email) {
+  // console.log(mailbox);
+  // console.log(email);
+  document.querySelector('#email-view').innerHTML = "";
+
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#email-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
+
+  const div = document.createElement('div');
+  div.innerHTML = `
+  <h4><b>From:</b> ${email.sender}</h4>
+  <h4><b>To:</b> ${email.recipients}</h4>
+  <h4><b>Subject:</b> ${email.subject}</h4>
+  <h4><b>Timestamp:</b> ${email.timestamp}</h4>
+  <button class="btn btn-sm btn-outline-primary" id="reply" onclick='reply(${email.id}); '>Reply</button>
+  <hr>
+  <h5>${email.body}</h5>
+  `;
+  document.querySelector('#email-view').append(div)
+
   
-  console.log(email_id)
+  if (mailbox === 'inbox') {
+    const button = `
+      <button class="btn btn-sm btn-outline-primary" id="archive">Archive</button>
+    `;
+    div.innerHTML += button;
+
+    document.querySelector('#archive').addEventListener('click', () => {
+      fetch(`/emails/${email.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          archived: true
+        })
+      }).then(() => {load_mailbox('inbox')})
+    });
+  }
+  else if (mailbox === 'archive') {
+    const button = `
+      <button class="btn btn-sm btn-outline-primary" id="unarchive">Unarchive</button>
+    `;
+    div.innerHTML += button;
+
+    document.querySelector('#unarchive').addEventListener('click', () => {
+      fetch(`/emails/${email.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          archived: false
+        })
+      }).then(() => {load_mailbox('inbox')})
+    });
+  }
 }
 
 function send_email() {
@@ -93,5 +146,27 @@ function send_email() {
   .then(result => {
     console.log(result);
     load_mailbox('sent'); 
+  });
+}
+
+function reply(email_id) {
+  fetch(`/emails/${email_id}`)
+  .then(response => response.json())
+  .then(email => {
+      compose_email();
+
+      console.log(email);
+
+      let subject = "";
+      if (email.subject.slice(0,2) === 'Re') {
+        subject += email.subject;
+      }
+      else {
+        subject += `Re: ${email.subject}`;
+      }
+
+      document.querySelector('#compose-recipients').value = email.sender;
+      document.querySelector('#compose-subject').value = subject;
+      document.querySelector('#compose-body').value = `On ${email.timestamp} ${email.sender} wrote: ${email.body}`;
   });
 }
