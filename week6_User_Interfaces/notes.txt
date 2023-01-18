@@ -53,14 +53,15 @@ of a web application
 2) ReactDOM
 3) Babel 
 
-Declaring a React component:
-    function App() {
-        return (
-            <!-- content -->
-        );
-    }
+Declaring and Rendering a React Component into a HTML page:
+    <script type="text/babel">
+        // Declare
+        function App() {
+            return (
+                <!-- HTML content -->
+            );
+        }
 
-Rendering a React component into a HTML page:
-    ReactDOM.render(<App />, document.querySelector("#app"));
-
-
+        // Render
+        ReactDOM.render(<App />, document.querySelector("#app"));
+    </script>

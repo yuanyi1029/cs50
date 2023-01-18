@@ -1,0 +1,7 @@
+----------------------------------- Testing -----------------------------------
+Verifying and making sure that the code that is written is correct and works the
+way as intended
+
+Testing in Python:
+1) Use assert
+
