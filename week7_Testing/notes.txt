@@ -2,11 +2,87 @@
 Verifying and making sure that the code that is written is correct and works the
 way as intended
 
-Testing in Python:
-1) Use assert
+Server Side Tests: 
+Unittest, TestCase
 
-Server side tests: 
-assert, unittest, TestCase
+Browser Side Tests:
+Selenium
 
-Browser side tests (browser testing):
-selenium
+----------------------------------- Unittest ----------------------------------
+Python library that allows users to implement test cases for code for automated testing
+
+Unittest Methods:
+1) assertEqual          4) assertFalse
+2) assertNotEqual       5) assertIn
+3) assertTrue           6) assertNotIn
+
+Example Test Cases:
+    import unittest
+
+    class Tests(unittest.TestCase):
+        def test1(self):
+           self.assertTrue(...)
+        def test2(self):
+            self.assertFalse(...)
+        def test3(self):
+            self.assertEqual(..., ...)
+
+Run Test Cases:
+    unittest.main()
+
+-------------------------------- Django Testing -------------------------------
+A tests.py file should be created in each application of a Django project to 
+implement test cases 
+
+Example:
+    from django.test import TestCase
+
+    class Tests(TestCase):
+        def test1(self):
+           self.assertTrue(...)
+        def test2(self):
+            self.assertFalse(...)
+        def test3(self):
+            self.assertEqual(..., ...)
+
+Run test cases:
+    python manage.py test
+
+----------------------------------- Selenium ----------------------------------
+Framework that can simulates a web browser to perform automated testing
+Selenium can be implemented alongside Unittest to automate browser-side tests
+
+Note: See 003_counter.html and 003_tests.py for example
+
+--------------- Continuous Integration Continuous Delivery (CI/CD) ------------
+2 best practices in software development on how code is written by groups of people 
+
+Continuous Integration
+    - Frequent merges to main branch
+    - Automated unit testing
+
+Continuous Delivery
+    - Short release schedules
+
+-------------------------------- Github Actions -------------------------------
+Continuous Integration tool provided by Github that enables the creation of 
+workflows, in which certain steps, procedures and checkings take place when 
+a certain event happens (Example: when someone executes git push)
+
+Workflows are structured with a special syntax called YAML
+
+------------------------------------- YAML ------------------------------------
+Configuration language used often to describe the configurations of tools and software
+A YAML code is made up of key value pairs  
+
+Example YAML file syntax:
+    key1: value1
+    key2: value2
+    key3:
+        -item1
+        -item2
+        -item3
+
+------------------------------------ Docker -----------------------------------
+Containerisation software
+enables cd
