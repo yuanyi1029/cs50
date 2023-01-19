@@ -1,1 +1,0 @@
-from 002_prime
