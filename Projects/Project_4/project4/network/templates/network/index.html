@@ -1,0 +1,134 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    <div id="app"></div>
+
+    <script type="text/babel">
+        
+        function App() {
+
+            function post(){
+                const username = "{{ request.user }}";
+                console.log(username);
+
+                fetch('/post', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        poster: username,
+                        content: document.querySelector("#content").value,
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.message);
+                    if (result.message === "Content Posted Successfully") {
+                        location.reload()
+                    }
+                })
+            }
+
+            function edit(post_id) {
+                // const newText = document.querySelector("#text_{{ post.id }}").value
+                const newText = document.querySelector(`#text_${post_id}`).value;
+
+                fetch('/edit', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        post_id: post_id,
+                        content: newText,
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.message)
+                })
+            }
+
+            return (
+                <div>
+                    <h1>All Posts</h1>
+                    {% if user.is_authenticated %}
+                        <div id="newpost">
+                            <h3>New Post</h3>
+                            <div class="form-group">
+                                <textarea class="form-control" type="text" id="content" name="content" rows="4"></textarea>
+                                <br/>
+                                <input class="btn btn-primary" type="submit" onClick={ post } value="Post"/>
+                            </div>
+                        </div>
+                        <br/>
+                    {% endif %}
+
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            {% if posts.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Previous</a>
+                                </li>
+                            {% endif %}
+                            {% for page_num in posts.paginator.page_range %}
+                                <li class="page-item {% if page_num == posts.number %}active{% endif %}">
+                                    <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                                </li>
+                            {% endfor %}
+                            {% if posts.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+                                </li>
+                            {% else %}
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+
+                    {% for post in posts %}
+                        <div id="newpost">
+                            <div id="{{ post }}">
+                                <a href="/users/{{ post.poster }}"><h3><b>{{ post.poster }}</b></h3></a>
+                                <h4>{{ post.content }}</h4>
+                                <h6>{{ post.time }}</h6>
+                                <h6>{{ post.likers.all | length }}</h6>
+                                {% if request.user == post.poster %}
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#modal_{{ post.id }}">Edit Post</button>
+                                    
+                                    <div class="modal fade" id="modal_{{ post.id }}" tabindex="-1" aria-labelledby="modal_{{ post.id }}_label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit Post</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <textarea rows="7" id="text_{{ post.id }}" class="form-control" name="content">{{ post.content }}</textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary" onClick={ () => edit({{ post.id }}) }>Save changes</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div>
+                            <h2>No Available Posts</h2>
+                        </div>
+                    {% endfor %}
+                    <br/>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />,  document.querySelector("#app"));
+
+    </script>
+{% endblock %}
