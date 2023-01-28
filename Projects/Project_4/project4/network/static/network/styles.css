@@ -9,3 +9,13 @@
     border-style: solid;
     border-color: grey;
 }
+
+#likediv {
+    overflow: hidden;
+    display: flex;
+    padding: 3px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    width: 11.5%;
+}

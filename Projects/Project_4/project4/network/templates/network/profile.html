@@ -62,6 +62,52 @@
                 })
             };
 
+            function edit(post_id) {
+                const textArea = document.querySelector(`#text_${post_id}`);
+                const mainArea = document.getElementById(`main_${post_id}`);
+
+                fetch('/edit', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        post_id: post_id,
+                        content: textArea.value,
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.message);
+                    mainArea.innerHTML = textArea.value;
+                })
+            }
+            
+            function like(post_id) {
+                console.log(post_id)
+                const likeButton = document.getElementById(`like_button_${post_id}`);
+                const likeCount = document.getElementById(`like_count_${post_id}`);
+
+                fetch('/like', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        user: "{{ request.user.username }}",
+                        post_id: post_id,
+                        condition: likeButton.value,
+                    })
+                })
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result.message);
+                    if (likeButton.value === "Like"){
+                        likeButton.value = "Unlike";
+                        likeCount.innerHTML = parseInt(likeCount.innerHTML) + 1; 
+                    }
+                    else if (likeButton.value === "Unlike") {
+                        likeButton.value = "Like";
+                        likeCount.innerHTML = parseInt(likeCount.innerHTML) - 1; 
+                    }
+                })
+            }
+
+
             return (
                 <div>
                     <div id="newpost">
@@ -106,9 +152,38 @@
                     {% for post in posts %}
                         <div id="newpost">
                             <a href="/users/{{ post.poster }}"><h3><b>{{ post.poster }}</b></h3></a>
-                            <h4>{{ post.content }}</h4>
+                            <h4 id="main_{{ post.id }}">{{ post.content }}</h4>
                             <h6>{{ post.time }}</h6>
-                            <h6>{{ post.likers.all | length }}</h6>
+                            <div id="likediv">
+                                {% if request.user in post.likers.all %}
+                                    <input class="btn btn-danger" type="submit" id="like_button_{{ post.id}}" onClick={ () => like({{ post.id }})} value="Unlike"/>
+                                {% else %}
+                                    <input class="btn btn-danger" type="submit" id="like_button_{{ post.id}}" onClick={ () => like({{ post.id }})} value="Like"/>
+                                {% endif %}
+
+                                <h4 id="like_count_{{ post.id}}">{{ post.likers.all | length }}</h4>
+                            </div>
+                            {% if request.user == post.poster %}
+                                <button class="btn btn-secondary" data-toggle="modal" data-target="#modal_{{ post.id }}">Edit Post</button>
+                                
+                                <div class="modal fade" id="modal_{{ post.id }}" tabindex="-1" aria-labelledby="modal_{{ post.id }}_label" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Post</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <textarea rows="7" id="text_{{ post.id }}" class="form-control" name="content">{{ post.content }}</textarea>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" onClick={ () => edit({{ post.id }}) }>Save changes</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                         </div>
                     {% empty %}
                         <div>

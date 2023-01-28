@@ -20,8 +20,3 @@ class Profile(models.Model):
     followers = models.ManyToManyField("User", blank=True, related_name="follower")
     followings = models.ManyToManyField("User", blank=True, related_name="following")
 
-class Comment(models.Model):
-    post = models.ForeignKey("Post", on_delete=models.CASCADE, related_name="postcomment")
-    user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="usercomment")
-    content = models.TextField(blank=True)
-    time = models.DateTimeField(auto_now_add=True)
