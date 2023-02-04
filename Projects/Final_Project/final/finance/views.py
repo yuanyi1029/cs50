@@ -24,9 +24,13 @@ def login_user(request):
         if user is not None :
             login(request, user)
             return HttpResponseRedirect(reverse("index"))
-        else:
+        elif user is None:
             return render(request, "finance/login.html", {
                 "message": "Incorrect username or password. Please try again."
+            })
+        else:
+            return render(request, "finance/login.html", {
+                "message": "An unknown error occured. Please try again."
             })
 
     else:
@@ -34,6 +38,10 @@ def login_user(request):
             # Try and retrieve message if any
             message = request.session.get("message")
             success = request.session.get("success")
+
+            # Delete message from request.session to only show it once 
+            del request.session["message"]
+            del request.session["success"]
 
             return render(request, "finance/login.html", {
                 "message": message,
@@ -46,7 +54,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponseRedirect(reverse("index"))
+    return HttpResponseRedirect(reverse("login"))
 
 def register(request):
     if request.method == "POST":
@@ -87,3 +95,12 @@ def register(request):
 
     else:
         return render(request, "finance/register.html")
+
+def records(request):
+    if request.method == "POST":
+        type = request.POST["type"]
+        print(type)
+
+        return render(request, "finance/records.html")
+    else:
+        return render(request, "finance/records.html")

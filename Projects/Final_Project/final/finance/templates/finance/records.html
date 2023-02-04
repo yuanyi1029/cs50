@@ -1,0 +1,64 @@
+{% extends "finance/layout.html" %}
+
+{% block title%}Records{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col" id="records">Records</div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-primary">Add a Record</button>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col">
+                <form action="{% url 'records' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row mb-3">
+                        <div class="col-lg-1">
+                            <label for="type" class="form-label">Type</label>
+                        </div>
+                        <div class="col">
+                            <input required type="radio" class="btn-check" value="income" name="type" id="success-outlined" autocomplete="off">
+                            <label class="btn btn-outline-success" for="success-outlined">Income</label>
+                            
+                            <input required type="radio" class="btn-check" value="expense "name="type" id="danger-outlined" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="danger-outlined">Expense</label>                        
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-lg-1">
+                            <label for="category" class="form-label">Category</label>
+                        </div>
+                        <div class="col-lg-4">
+                            <input required type="radio" class="btn-check" value="income" name="type" id="success-outlined" autocomplete="off">
+                            <label class="btn btn-outline-success" for="success-outlined">Income</label>
+                            
+                            <input required type="radio" class="btn-check" value="expense "name="type" id="danger-outlined" autocomplete="off">
+                            <label class="btn btn-outline-danger" for="danger-outlined">Expense</label>                        
+                        </div>
+                    </div>
+
+                    
+
+
+
+
+
+
+
+
+                    
+                    <button type="submit" class="btn btn-primary">Add Record</button>
+                </form>
+                <br>         
+            <div>
+        </div>
+    </div>
+{% endblock %}

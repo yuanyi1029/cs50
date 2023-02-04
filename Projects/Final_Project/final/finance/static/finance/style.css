@@ -16,11 +16,15 @@
 
 .body {
     padding-top: 30px;
-    padding-left: 100px;
 }
 
-#dashboard, #login, #register {
+#dashboard, #login, #register, #records {
     font-family: sans-serif;
     font-size: 72px;
     font-weight: bold;
+}
+
+#dashboard2 {
+    font-family: sans-serif;
+    font-size: 20px;
 }

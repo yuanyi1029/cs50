@@ -3,7 +3,15 @@
 {% block title %}Index Page{% endblock %}
 
 {% block body %}
-    <div id="dashboard">User Dashboard</div>
-    <button>dhfhdf</button>
-    <button type="button" class="btn btn-danger">Danger</button>
+    <div class="container">
+        <div class="row">
+            <div class="col" id="dashboard">User Dashboard</div>
+        </div>
+        <div class="row">
+            <div class="col" id="dashboard2"><b>Welcome Back</b>, <span style="color:#5709FE; font-weight:bold;">{{ request.user.username}}</span></div>
+        </div>
+        <div class="row">
+            <div class="col" id="dashboard2">Here's a quick view of your personal finance statistics</div>
+        </div>
+    </div>
 {% endblock %}
