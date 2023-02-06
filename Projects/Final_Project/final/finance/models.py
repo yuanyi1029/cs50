@@ -20,7 +20,13 @@ class Record(models.Model):
         (11, "Others")
     ]
 
+    TYPE_CHOICES = [
+        (1, "Income"),
+        (2, "Expense"),
+    ]
+
     user = models.ForeignKey("User", on_delete=models.CASCADE, related_name="user")
+    record_type = models.PositiveIntegerField(choices=TYPE_CHOICES)
     category = models.PositiveIntegerField(choices=CATEGORY_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     comment = models.CharField(max_length=64)

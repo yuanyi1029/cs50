@@ -1,10 +1,14 @@
+body {
+    background-color: #EDEDED;
+}
+
 .navbar {
-    padding-left: 25px !important;
+    padding-left: 25px;
 }
 
 .navbar-brand {
     font-family: sans-serif;
-    font-size: 28px !important;
+    font-size: 28px;
     font-weight: bold;
 }
 

@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.db import IntegrityError
+from datetime import datetime
 from .models import User, Record
 
 # Create your views here.
@@ -98,9 +99,59 @@ def register(request):
 
 def records(request):
     if request.method == "POST":
-        type = request.POST["type"]
-        print(type)
+        user = request.user
+        record_type = request.POST["type"]
+        category = request.POST["category"]
+        amount = request.POST["amount"]
+        comment = request.POST["comment"]
+        time = datetime.now()
 
-        return render(request, "finance/records.html")
+        print(record_type)
+        print(type(record_type))
+
+        if not record_type or not category or not amount:
+            return render(request, "finance/records.html", {
+                "types": Record.TYPE_CHOICES,
+                "categories": Record.CATEGORY_CHOICES,
+                "message": "Incomplete fields. Please try again."
+            })
+
+        # TODO: 0.0 VALIDATION FOR AMOUNT
+
+        try: 
+            record_type = int(record_type)
+            category = int(category)
+            amount = float(amount)
+
+            new_record = Record(
+                user = user,
+                record_type = record_type,
+                category = category,
+                amount = amount,
+                comment = comment,
+                time = time
+            )
+            new_record.save()
+
+            return render(request, "finance/records.html", {
+                "types": Record.TYPE_CHOICES,
+                "categories": Record.CATEGORY_CHOICES,
+                "records": Record.objects.all()
+            })            
+
+        except:
+            return render(request, "finance/records.html", {
+                "message": "An unknown error occured. Please try again.",
+                "types": Record.TYPE_CHOICES,
+                "categories": Record.CATEGORY_CHOICES,
+                "records": Record.objects.all()
+            })
+
     else:
-        return render(request, "finance/records.html")
+        return render(request, "finance/records.html", {
+            "types": Record.TYPE_CHOICES,
+            "categories": Record.CATEGORY_CHOICES,
+            "records": Record.objects.all()
+        })
+
+

@@ -1,64 +1,123 @@
 {% extends "finance/layout.html" %}
+{% load static%}
 
 {% block title%}Records{% endblock %}
 
+{% block script %}
+    <script src="{% static 'finance/records.js' %}"></script>
+{% endblock %}
+
 {% block body %}
     <div class="container">
+        <div class="row">
+            {% if message %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        </div>
+
         <div class="row">
             <div class="col" id="records">Records</div>
         </div>
         <div class="row">
             <div class="col">
-                <button type="button" class="btn btn-primary">Add a Record</button>
+                <button type="button" class="btn btn-primary" id="new_record_button">New Record</button>
             </div>
         </div>
 
         <br>
 
         <div class="row">
-            <div class="col">
-                <form action="{% url 'records' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="form-row mb-3">
-                        <div class="col-lg-1">
-                            <label for="type" class="form-label">Type</label>
-                        </div>
-                        <div class="col">
-                            <input required type="radio" class="btn-check" value="income" name="type" id="success-outlined" autocomplete="off">
-                            <label class="btn btn-outline-success" for="success-outlined">Income</label>
-                            
-                            <input required type="radio" class="btn-check" value="expense "name="type" id="danger-outlined" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="danger-outlined">Expense</label>                        
-                        </div>
+            <form action="{% url 'records' %}" method="POST" id="record_form">
+                {% csrf_token %}
+                <div class="row mb-3">
+                    <div class="col-lg-2">
+                        <label for="type" class="form-label">Type</label>
                     </div>
-
-                    <div class="row mb-3">
-                        <div class="col-lg-1">
-                            <label for="category" class="form-label">Category</label>
-                        </div>
-                        <div class="col-lg-4">
-                            <input required type="radio" class="btn-check" value="income" name="type" id="success-outlined" autocomplete="off">
-                            <label class="btn btn-outline-success" for="success-outlined">Income</label>
-                            
-                            <input required type="radio" class="btn-check" value="expense "name="type" id="danger-outlined" autocomplete="off">
-                            <label class="btn btn-outline-danger" for="danger-outlined">Expense</label>                        
-                        </div>
+                    <div class="col">
+                        <input required type="radio" class="btn-check" value="{{ types.0.0 }}" name="type" id="success-outlined" autocomplete="off">
+                        <label class="btn btn-outline-success" for="success-outlined">{{ types.0.1 }}</label>
+                        
+                        <input required type="radio" class="btn-check" value="{{ types.1.0 }}" name="type" id="danger-outlined" autocomplete="off">
+                        <label class="btn btn-outline-danger" for="danger-outlined">{{ types.1.1 }}</label>                        
                     </div>
+                </div>
 
-                    
+                <div class="row mb-3">
+                    <div class="col-lg-2">
+                        <label for="category" class="form-label">Category</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <select class="form-select" name="category">
+                            <option selected disabled value="-1">Choose..</option>
+                            {% for category in categories %}
+                                <option value="{{ category.0 }}">{{ category.1 }}</option>
+                            {% endfor %}
+                        </select>
 
+                    </div>
+                </div>
 
+                <div class="row mb-3">
+                    <div class="col-lg-2">
+                        <label for="amount" class="form-label">Amount (MYR)</label>
+                    </div>
+                    <div class="col-lg-2">
+                        <input required class="form-control" type="number" min="0.01" step="0.01" name="amount">
+                    </div>
+                </div>
 
+                <div class="row mb-3">
+                    <div class="col-lg-2">
+                        <label for="comment" class="form-label">Additional Comment </label>
+                    </div>
+                    <div class="col-lg-5">
+                        <input type="text" class="form-control" name="comment" placeholder="Optional">
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary" id="add_record_button">Add Record</button>
+            </form>
+        </div>
+        
+        <br>
 
+        <div class="row table-responsive">
+            <table class="table table-hover">
+                <thead class="table table-secondary">
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Amount (MYR)</th>
+                        <th scope="col">Comment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in records %}
+                        <tr>
+                            <td scope="row">{{ record.time }}</td>
+                            <td>{{ record.category }}</td>
+                            <!-- <td>{{ categories.record.category.1 }}</td> -->
+                            <!-- {{ category.1 }} -->
 
+                            {% if record.record_type == 1 %}
+                                <th>+ {{ record.amount }}</th>
+                            {% else %}
+                                <th>- {{ record.amount }}</th>
+                            {% endif %}
 
-
-
-                    
-                    <button type="submit" class="btn btn-primary">Add Record</button>
-                </form>
-                <br>         
-            <div>
+                            {% if not record.comment %}
+                                <td>None</td>
+                                {% else %}
+                                <td>{{ record.comment }}</td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 {% endblock %}
+
+
