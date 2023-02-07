@@ -45,7 +45,7 @@ Example:
         def test3(self):
             self.assertEqual(..., ...)
 
-Run test cases:
+Run Test Cases:
     python manage.py test
 
 ----------------------------------- Selenium ----------------------------------
@@ -65,11 +65,30 @@ Continuous Delivery
     - Short release schedules
 
 -------------------------------- Github Actions -------------------------------
-Continuous Integration tool provided by Github that enables the creation of 
+Continuous integration tool provided by Github that enables the creation of 
 workflows, in which certain steps, procedures and checkings take place when 
 a certain event happens (Example: when someone executes git push)
 
 Workflows are structured with a special syntax called YAML
+
+Example workflow in a Django project:
+    name: Testing
+    on: push
+
+    jobs:
+    test_project:
+        runs-on: ubuntu-latest
+        steps:
+        - uses: actions/checkout@v2
+        - name: Run Django unit tests
+        run: |
+            pip3 install --user django
+            python3 manage.py test
+
+Note: The 'Testing' workflow runs when a git push happens, where it will install
+Django and run the test cases provided in the tests.py file on an ubuntu virtual 
+machine by Github. The results of the 'Testing' workflow will be displayed on the
+'Actions' tab on a Github repository
 
 ------------------------------------- YAML ------------------------------------
 Configuration language used often to describe the configurations of tools and software
@@ -84,5 +103,19 @@ Example YAML file syntax:
         -item3
 
 ------------------------------------ Docker -----------------------------------
-Containerisation software
-enables cd
+Containerisation software that enables continuous delivery that by allowing 
+applications in containers, where each container will have its own configurations
+
+Docker solves the problem of having different configurations on different computers,
+as long as all computers have the same instructions on how to set up a Docker
+container called a Dockerfile
+
+Example Dockerfile:
+    FROM python:3
+    COPY .  /usr/src/app
+    WORKDIR /usr/src/app
+    RUN pip install -r requirements.txt
+    CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
+
+Start Up Containers:
+    docker-compose up

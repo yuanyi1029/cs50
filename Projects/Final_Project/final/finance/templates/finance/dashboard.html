@@ -1,0 +1,67 @@
+{% extends "finance/layout.html" %}
+{% load static %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col" id="dashboard">User Dashboard</div>
+        </div>
+        <div class="row">
+            <div class="col" id="dashboard2"><b>Welcome Back</b>, <span style="color:#5709FE; font-weight:bold;">{{ request.user.username}}</span></div>
+        </div>
+        <div class="row">
+            <div class="col" id="dashboard2">Here's a quick view of your personal finance statistics</div>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="card text-center" style="width: 275px">
+                    <div class="card-header" id="card-header">
+                        <div class="row">
+                            <div class="card-title">Income (Past 7 Days)</div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-white" id="card-footer">
+                        <div class="card-text">MYR 80</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card text-center" style="width: 275px">
+                    <div class="card-header" id="card-header">
+                        <div class="row">
+                            <div class="card-title">Expenses (Past 7 Days)</div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-white" id="card-footer">
+                        <div class="card-text">MYR 80</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="card text-center" style="width: 275px">
+                    <div class="card-header" id="card-header">
+                        <div class="row">
+                            <div class="card-title">Average Spending (Past 7 Days)</div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-white" id="card-footer">
+                        <div class="card-text">MYR 80</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        {% for record in records %}
+            <h6>{{ record.amount }}</h6>
+        {% endfor %}
+    </div>
+{% endblock %}

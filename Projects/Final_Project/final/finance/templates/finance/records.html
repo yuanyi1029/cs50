@@ -1,5 +1,5 @@
 {% extends "finance/layout.html" %}
-{% load static%}
+{% load static %}
 
 {% block title%}Records{% endblock %}
 
@@ -96,16 +96,15 @@
                 <tbody>
                     {% for record in records %}
                         <tr>
-                            <td scope="row">{{ record.time }}</td>
-                            <td>{{ record.category }}</td>
-                            <!-- <td>{{ categories.record.category.1 }}</td> -->
-                            <!-- {{ category.1 }} -->
+                            <td scope="row">{{ record.time | date:"F j, Y, g:i A"}}</td>
 
-                            {% if record.record_type == 1 %}
-                                <th>+ {{ record.amount }}</th>
-                            {% else %}
-                                <th>- {{ record.amount }}</th>
-                            {% endif %}
+                            {% for category in categories %}
+                                {% if category.0 == record.category %}
+                                    <td>{{ category.1 }}</td>
+                                {% endif %}
+                            {% endfor%}
+
+                            <th> {{ record.amount }}</th>
 
                             {% if not record.comment %}
                                 <td>None</td>
@@ -119,5 +118,4 @@
         </div>
     </div>
 {% endblock %}
-
 

@@ -1,0 +1,84 @@
+----------------------------- Scalabilty & Security ---------------------------
+Scalabilty & Security are issues that needed to be handled when hosting a web
+application on the internet  
+
+---------------------------------- Scalabilty ---------------------------------
+Scalabilty Issue:
+Cloud or On Premise servers may be required to handle large amounts of GET requests
+and might fail to do so due to many reasons (computing power, process time, server size)
+
+A benchmarking tool can be used to perform analysis on how many users a server 
+can actually handle
+
+Server Scaling Solutions:
+1) Vertical Scaling (Getting a bigger server)
+2) Horizontal Scaling (Getting more servers), Load Balancer (Hardware) required 
+3) AutoScaling (Adjust the number of servers automatically based on demand)
+
+Database Scaling Solutions:
+1) Database Partitioning (Splitting data sets into smaller parts)
+2) Database Replication (Having  duplicate databases as backup if one fails)
+    - Single-Primary Replication (Only 1 database can read and write)
+    - Multi-Primary Replication (All databases can read and write )
+3) Caching (Storing saved information of something to access it quickly to prevent
+   communicating with the database)
+    - Client-Side Caching (Data is cached on the client's browser)
+
+-------------------------------- Load Balancing -------------------------------
+Process performed by a Load Balancer hardware
+
+Load Balancing Methods:
+1) Random Choice (Assigns a server randomly)
+2) Round Robin (Assigns a server rotatively)
+3) Fewest Connections (Assigns a server with the least connections)
+ 
+
+Load Balancing Issue:
+User sessions might be saved on an initial server but later redirected to another
+server
+
+Solutions:
+Use Session-Aware Load Balancing
+1) Sticky sessions (Load Balancer remembers the initial server that stored the session)
+2) Sessions in Database (Sessions are stored in the database)
+3) Client-Side Sessions (Sessions are stored client-side)
+
+--------------------------------- Git Security --------------------------------
+Git Security Issue:
+Since Git is open source, the data in a repository are easily accessible, hence 
+secure information may be leaked easily as well
+
+Git Security Solution: 
+Wipe out the leaked commit versions completely instead of just commiting a new
+version, as old versions are also accessible by anyone
+
+-------------------------------- HTML Security --------------------------------
+HTML Security Issue:
+Phishing attacks are common with HTML, in which HTML code from a web service can
+be easily coppied and impersonated
+
+------------------------------- Django Security -------------------------------
+Django Security Issue:
+Communication requests and responses between client and server may be unsecure,
+resulting in data being intercepted
+
+Django Security Issue:
+Use Encryption During Communications 
+1) Secret-Key Cryptography (Sender and Receiver uses single key for encryption
+   and decryption)
+2) Public-Key Cryptography (Sender and Receiver uses public key for encryption
+   and public key for decryption )
+
+----------------------------- Javascript Security -----------------------------
+Javascript Security Issues:
+1 ) Cross-Site Scripting may happen in which hackers might be able to run extra
+    Javascript on a web service
+2)  Cross-Site Request Forgery may happen in which hackers fake a request to a 
+    webservice to perform certain actions unintended by the victim
+
+Javascript Security Solutions:
+1) Cross-Site Scripting detections and precautions should be implemented when 
+   designing a web service  
+2) Use Cross-Site Request Forgery (CSRF) Token when implementing a form in which 
+   the CSRF Token is different on each session, making it unable to forge 
+   

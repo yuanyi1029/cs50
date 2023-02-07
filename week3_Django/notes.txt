@@ -20,7 +20,7 @@ Important Pre-created Files in a Django Application:
 1) views.py         Used to define what the user sees when visiting a specific route
 
 ------------------------------------ Routes -----------------------------------
-A urls.py file should be created in each application in a Django project to 
+A urls.py file should be created in each application of a Django project to 
 define all the routes for that specific application
 
 Example urls.py File in a Django Application:

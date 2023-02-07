@@ -3,12 +3,16 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse
 from django.db import IntegrityError
-from datetime import datetime
+from django.utils import timezone
+from datetime import datetime, timedelta
 from .models import User, Record
 
 # Create your views here.
 def index(request):
-    return render(request, "finance/index.html")
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse("dashboard"))    
+    else:
+        return HttpResponseRedirect(reverse("welcome"))
 
 def login_user(request):
     if request.method == "POST":
@@ -24,7 +28,7 @@ def login_user(request):
 
         if user is not None :
             login(request, user)
-            return HttpResponseRedirect(reverse("index"))
+            return HttpResponseRedirect(reverse("dashboard"))
         elif user is None:
             return render(request, "finance/login.html", {
                 "message": "Incorrect username or password. Please try again."
@@ -97,17 +101,37 @@ def register(request):
     else:
         return render(request, "finance/register.html")
 
+
+def welcome(request):
+    return render(request, "finance/welcome.html")
+
+def dashboard(request):
+    user = request.user
+
+    current_time = datetime.now()
+    seven_days_ago = datetime.now() - timedelta(days=7)
+
+    past_7_income = Record.objects.filter(user=user, record_type=1, time__range=(seven_days_ago, current_time))
+    past_7_expense = Record.objects.filter(user=user, record_type=2, time__range=(seven_days_ago, current_time))
+
+    # print(past_7_income)
+    # print(past_7_expense)
+
+    return render(request, "finance/dashboard.html", {
+        "records": Record.objects.filter(user=user),
+        "past_7_income": past_7_income,
+        "past_7_expense": past_7_expense
+    })
+
 def records(request):
+    user = request.user
+
     if request.method == "POST":
-        user = request.user
         record_type = request.POST["type"]
         category = request.POST["category"]
         amount = request.POST["amount"]
         comment = request.POST["comment"]
         time = datetime.now()
-
-        print(record_type)
-        print(type(record_type))
 
         if not record_type or not category or not amount:
             return render(request, "finance/records.html", {
@@ -116,12 +140,22 @@ def records(request):
                 "message": "Incomplete fields. Please try again."
             })
 
-        # TODO: 0.0 VALIDATION FOR AMOUNT
-
         try: 
             record_type = int(record_type)
             category = int(category)
-            amount = float(amount)
+
+            if record_type == 1:
+                amount = float(amount)
+            else: 
+                amount = -(float(amount))
+                
+            if amount == 0:
+                return render(request, "finance/records.html", {
+                    "message": "Amount cannot be 0. Please try again.",
+                    "types": Record.TYPE_CHOICES,
+                    "categories": Record.CATEGORY_CHOICES,
+                    "records": Record.objects.filter(user=user)
+                })                
 
             new_record = Record(
                 user = user,
@@ -136,7 +170,7 @@ def records(request):
             return render(request, "finance/records.html", {
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "records": Record.objects.all()
+                "records": Record.objects.filter(user=user)
             })            
 
         except:
@@ -144,14 +178,14 @@ def records(request):
                 "message": "An unknown error occured. Please try again.",
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "records": Record.objects.all()
+                "records": Record.objects.filter(user=user)
             })
 
     else:
         return render(request, "finance/records.html", {
             "types": Record.TYPE_CHOICES,
             "categories": Record.CATEGORY_CHOICES,
-            "records": Record.objects.all()
+            "records": Record.objects.filter(user=user)
         })
 
 

@@ -29,6 +29,6 @@ class Record(models.Model):
     record_type = models.PositiveIntegerField(choices=TYPE_CHOICES)
     category = models.PositiveIntegerField(choices=CATEGORY_CHOICES)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    comment = models.CharField(max_length=64)
-    time = models.DateTimeField(auto_now_add=True)
+    comment = models.CharField(max_length=64, blank=True)
+    time = models.DateTimeField(auto_now_add=False)
 
