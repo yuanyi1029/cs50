@@ -113,14 +113,31 @@ def dashboard(request):
 
     past_7_income = Record.objects.filter(user=user, record_type=1, time__range=(seven_days_ago, current_time))
     past_7_expense = Record.objects.filter(user=user, record_type=2, time__range=(seven_days_ago, current_time))
+    past_7_total_income = 0
+    past_7_total_expense = 0
 
-    # print(past_7_income)
-    # print(past_7_expense)
+    for record in past_7_income:
+        past_7_total_income += record.amount
+    
+    for record in past_7_expense:
+        past_7_total_expense -= record.amount
+
+    past_7_average_income = round(past_7_total_income / len(past_7_income), 2)
+    past_7_average_expense = round(past_7_total_expense / len(past_7_expense), 2)
+
+    # print(past_7_total_income)
+    # print(past_7_total_expense)
+    # print(past_7_average_income)
+    # print(past_7_average_expense)
 
     return render(request, "finance/dashboard.html", {
         "records": Record.objects.filter(user=user),
         "past_7_income": past_7_income,
-        "past_7_expense": past_7_expense
+        "past_7_expense": past_7_expense,
+        "past_7_total_income": past_7_total_income,
+        "past_7_total_expense": past_7_total_expense,
+        "past_7_average_income": past_7_average_income,
+        "past_7_average_expense": past_7_average_expense,
     })
 
 def records(request):
@@ -154,7 +171,7 @@ def records(request):
                     "message": "Amount cannot be 0. Please try again.",
                     "types": Record.TYPE_CHOICES,
                     "categories": Record.CATEGORY_CHOICES,
-                    "records": Record.objects.filter(user=user)
+                    "records": Record.objects.filter(user=user).order_by("-time")
                 })                
 
             new_record = Record(
@@ -170,7 +187,7 @@ def records(request):
             return render(request, "finance/records.html", {
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "records": Record.objects.filter(user=user)
+                "records": Record.objects.filter(user=user).order_by("-time")
             })            
 
         except:
@@ -178,14 +195,13 @@ def records(request):
                 "message": "An unknown error occured. Please try again.",
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "records": Record.objects.filter(user=user)
+                "records": Record.objects.filter(user=user).order_by("-time")
             })
 
     else:
         return render(request, "finance/records.html", {
             "types": Record.TYPE_CHOICES,
             "categories": Record.CATEGORY_CHOICES,
-            "records": Record.objects.filter(user=user)
+            "records": Record.objects.filter(user=user).order_by("-time")
         })
-
 
