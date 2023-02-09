@@ -6,6 +6,7 @@ from django.db import IntegrityError
 from django.utils import timezone
 from datetime import datetime, timedelta
 from .models import User, Record
+import json
 
 # Create your views here.
 def index(request):
@@ -130,6 +131,17 @@ def dashboard(request):
     # print(past_7_average_income)
     # print(past_7_average_expense)
 
+    pie_data = {}
+
+    for record in Record.objects.all():
+        category = Record.CATEGORY_CHOICES[record.category-1][1]
+
+        if record.record_type == 2:
+            if category not in pie_data:
+                pie_data[category] = -(record.amount)
+            else:
+                pie_data[category] += -(record.amount)
+
     return render(request, "finance/dashboard.html", {
         "records": Record.objects.filter(user=user),
         "past_7_income": past_7_income,
@@ -138,6 +150,7 @@ def dashboard(request):
         "past_7_total_expense": past_7_total_expense,
         "past_7_average_income": past_7_average_income,
         "past_7_average_expense": past_7_average_expense,
+        "pie_data": pie_data
     })
 
 def records(request):
