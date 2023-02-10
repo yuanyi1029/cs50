@@ -8,32 +8,60 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const ctx = document.getElementById('myChart');
+            const pieChartElement = document.getElementById('pieChart');
+            const lineChartElement = document.getElementById('lineChart');
             
-            new Chart(ctx, {
+            new Chart(pieChartElement, {
                 type: 'pie',
                 data: {
-                labels: [
-                    {% for key in pie_data.keys %}
-                        "{{ key }}",
-                    {% endfor %}
-                ],
-                datasets: [{
-                    label: 'MYR',
-                    data: [
-                        {% for value in pie_data.values %}
-                            {{ value }},
+                    labels: [
+                        {% for key in pie_data.keys %}
+                            "{{ key }}",
                         {% endfor %}
                     ],
-                    borderWidth: 1
-                }]
+                    datasets: [{
+                        label: 'MYR',
+                        data: [
+                            {% for value in pie_data.values %}
+                                {{ value }},
+                            {% endfor %}
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                // options: {
+                //     scales: {
+                //         y: {
+                //             beginAtZero: true
+                //         }
+                //     },
+                // }
+            });
+
+            new Chart(lineChartElement, {
+                type: 'line',
+                data: {
+                    labels: [
+                        {% for key in line_data.keys %}
+                            "{{ key }}",
+                        {% endfor %}
+                    ],
+                    datasets: [{
+                        label: 'MYR',
+                        data: [
+                            {% for value in line_data.values %}
+                                {{ value }},
+                            {% endfor %}
+                        ],
+                        borderWidth: 1
+                    }]
                 },
                 options: {
-                scales: {
-                    y: {
-                    beginAtZero: true
-                    }
-                }
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
                 }
             });
         })
@@ -54,7 +82,7 @@
         </div>
     </div>
 
-    <br>
+    <br><br>
 
     <div class="container">
         <div class="row">
@@ -96,9 +124,81 @@
             </div>
         </div>
 
+        <br>
+
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-8">
+                <div class="card text-center text-white">
+                    <div class="card-header" id="card-header" style="background-color: #5709FE;">
+                        <div class="row">
+                            <div class="card-title">Daily Spendings</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </div>
             </div>
+
+            <div class="col-lg-4">
+                <div class="card text-center text-white">
+                    <div class="card-header" id="card-header" style="background-color: #5709FE;">
+                        <div class="row">
+                            <div class="card-title">Percentage Spending</div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <canvas id="pieChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+
+        <div class="row">
+            <div class="col" id="recent-records">
+                Recent Records
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="row table-responsive">
+                <table class="table table-hover">
+                    <thead class="table table-secondary">
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Amount (MYR)</th>
+                            <th scope="col">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for record in records %}
+                            <tr>
+                                <td scope="row">{{ record.time | date:"F j, Y, g:i A"}}</td>
+    
+                                {% for category in categories %}
+                                    {% if category.0 == record.category %}
+                                        <td>{{ category.1 }}</td>
+                                    {% endif %}
+                                {% endfor%}
+    
+                                <th> {{ record.amount }}</th>
+    
+                                {% if not record.comment %}
+                                    <td>None</td>
+                                    {% else %}
+                                    <td>{{ record.comment }}</td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>            
+        </div>
+        <div class="row">
+            <div><a href="{% url 'records' %}">View all Records.</a></div>
         </div>
     </div>
 
@@ -109,8 +209,6 @@
         <h6 id="testy">{{ pie_data.apple }}</h6>
         <h6 id="testy">{{ pie_data.banana}}</h6>
         <h6 id="testy2"></h6>
-        <canvas id="myChart"></canvas>
     </div>
-
 
 {% endblock %}

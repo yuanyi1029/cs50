@@ -109,11 +109,15 @@ def welcome(request):
 def dashboard(request):
     user = request.user
 
-    current_time = datetime.now()
-    seven_days_ago = datetime.now() - timedelta(days=7)
+    current_date = datetime.now().date()
+    past_seven_days = current_date - timedelta(days=6)
+    past_thirty_days = current_date - timedelta(days=29)
 
-    past_7_income = Record.objects.filter(user=user, record_type=1, time__range=(seven_days_ago, current_time))
-    past_7_expense = Record.objects.filter(user=user, record_type=2, time__range=(seven_days_ago, current_time))
+    past_7_income = Record.objects.filter(user=user, record_type=1, time__range=(past_seven_days, current_date + timedelta(days=1)))
+    past_7_expense = Record.objects.filter(user=user, record_type=2, time__range=(past_seven_days, current_date + timedelta(days=1)))
+    past_30_expense = Record.objects.filter(user=user, record_type=2, time__range=(past_thirty_days, current_date + timedelta(days=1)))
+    
+    # Determining average income and expense (past 7 days) for HTML card
     past_7_total_income = 0
     past_7_total_expense = 0
 
@@ -123,14 +127,23 @@ def dashboard(request):
     for record in past_7_expense:
         past_7_total_expense -= record.amount
 
-    past_7_average_income = round(past_7_total_income / len(past_7_income), 2)
-    past_7_average_expense = round(past_7_total_expense / len(past_7_expense), 2)
+    past_7_average_expense = round(past_7_total_expense / 7, 2)
 
-    # print(past_7_total_income)
-    # print(past_7_total_expense)
-    # print(past_7_average_income)
-    # print(past_7_average_expense)
+    # Making a dictionary for line chart data
+    line_data = {}
 
+    for i in range(30):
+        date = current_date - timedelta(days=(29-i))
+        line_data[date] = 0
+
+    for record in past_30_expense:
+        if record.record_type == 2:
+            line_data[record.time.date()] -= record.amount
+
+    for record in past_7_expense:
+        print(record)
+
+    # Making a dictionary for pie chart data
     pie_data = {}
 
     for record in Record.objects.all():
@@ -142,15 +155,15 @@ def dashboard(request):
             else:
                 pie_data[category] += -(record.amount)
 
+
     return render(request, "finance/dashboard.html", {
-        "records": Record.objects.filter(user=user),
-        "past_7_income": past_7_income,
-        "past_7_expense": past_7_expense,
+        "records": Record.objects.filter(user=user).order_by("-time")[:10],
+        "categories": Record.CATEGORY_CHOICES,
         "past_7_total_income": past_7_total_income,
         "past_7_total_expense": past_7_total_expense,
-        "past_7_average_income": past_7_average_income,
         "past_7_average_expense": past_7_average_expense,
-        "pie_data": pie_data
+        "pie_data": pie_data,
+        "line_data": line_data,
     })
 
 def records(request):
