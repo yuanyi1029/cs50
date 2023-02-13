@@ -9,6 +9,8 @@ urlpatterns = [
     path("welcome/", views.welcome, name="welcome"),
     path("dashboard/", views.dashboard, name="dashboard"),
     path("records/", views.records, name="records"),
+    path("planned/", views.planned, name="planned"),
+    path("delete/<int:record_id>", views.delete, name="delete"),
 
     # path("add_record/", views.add_record, name="add_record"),
 ]

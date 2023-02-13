@@ -144,7 +144,7 @@
                 <div class="card text-center text-white">
                     <div class="card-header" id="card-header" style="background-color: #5709FE;">
                         <div class="row">
-                            <div class="card-title">Percentage Spending</div>
+                            <div class="card-title">Expenses Structure</div>
                         </div>
                     </div>
                     <div class="card-footer">
@@ -191,6 +191,14 @@
                                     {% else %}
                                     <td>{{ record.comment }}</td>
                                 {% endif %}
+
+                                <td>
+                                    <form action="{% url 'delete' record.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="origin_url" value="dashboard">
+                                        <input class="btn btn-danger" type="submit" name="delete" value="Delete">
+                                    </form>
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>

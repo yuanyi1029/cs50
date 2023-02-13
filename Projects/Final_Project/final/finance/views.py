@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
 from django.utils import timezone
+from django.core.paginator import Paginator
 from datetime import datetime, timedelta
-from .models import User, Record
+
+from .models import User, Record, Planned
 import json
 
 # Create your views here.
@@ -57,7 +60,7 @@ def login_user(request):
         except:
             return render(request, "finance/login.html")
 
-
+@login_required
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse("login"))
@@ -106,6 +109,7 @@ def register(request):
 def welcome(request):
     return render(request, "finance/welcome.html")
 
+@login_required
 def dashboard(request):
     user = request.user
 
@@ -140,9 +144,6 @@ def dashboard(request):
         if record.record_type == 2:
             line_data[record.time.date()] -= record.amount
 
-    for record in past_7_expense:
-        print(record)
-
     # Making a dictionary for pie chart data
     pie_data = {}
 
@@ -166,21 +167,31 @@ def dashboard(request):
         "line_data": line_data,
     })
 
+@login_required
 def records(request):
     user = request.user
 
+    user_records = Record.objects.filter(user=user).order_by("-time")
+    paginator = Paginator(user_records, 10)
+
+    page_number = request.GET.get('page')
+    records = paginator.get_page(page_number)
+
     if request.method == "POST":
-        record_type = request.POST["type"]
-        category = request.POST["category"]
+        record_type = request.POST["record_type"]
+        category = request.POST.get("category", False)
         amount = request.POST["amount"]
         comment = request.POST["comment"]
         time = datetime.now()
 
         if not record_type or not category or not amount:
             return render(request, "finance/records.html", {
+                "message": "Incomplete fields. Please try again.",
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "message": "Incomplete fields. Please try again."
+                "frequency": Planned.FREQUENCY_CHOICES,
+                "recurrences": Planned.RECURRENCE_CHOICES,
+                "records": records
             })
 
         try: 
@@ -197,7 +208,9 @@ def records(request):
                     "message": "Amount cannot be 0. Please try again.",
                     "types": Record.TYPE_CHOICES,
                     "categories": Record.CATEGORY_CHOICES,
-                    "records": Record.objects.filter(user=user).order_by("-time")
+                    "frequency": Planned.FREQUENCY_CHOICES,
+                    "recurrences": Planned.RECURRENCE_CHOICES,
+                    "records": records
                 })                
 
             new_record = Record(
@@ -213,7 +226,9 @@ def records(request):
             return render(request, "finance/records.html", {
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "records": Record.objects.filter(user=user).order_by("-time")
+                "frequency": Planned.FREQUENCY_CHOICES,
+                "recurrences": Planned.RECURRENCE_CHOICES,                
+                "records": records
             })            
 
         except:
@@ -221,13 +236,105 @@ def records(request):
                 "message": "An unknown error occured. Please try again.",
                 "types": Record.TYPE_CHOICES,
                 "categories": Record.CATEGORY_CHOICES,
-                "records": Record.objects.filter(user=user).order_by("-time")
+                "frequency": Planned.FREQUENCY_CHOICES,
+                "recurrences": Planned.RECURRENCE_CHOICES,
+                "records": records
             })
 
     else:
         return render(request, "finance/records.html", {
             "types": Record.TYPE_CHOICES,
             "categories": Record.CATEGORY_CHOICES,
-            "records": Record.objects.filter(user=user).order_by("-time")
+            "frequency": Planned.FREQUENCY_CHOICES,
+            "recurrences": Planned.RECURRENCE_CHOICES,
+            "records": records
         })
 
+@login_required
+def planned(request):
+    user = request.user
+
+    user_records = Record.objects.filter(user=user).order_by("-time")
+    paginator = Paginator(user_records, 10)
+
+    page_number = request.GET.get('page')
+    records = paginator.get_page(page_number)
+
+    if request.method == "POST":
+        name = request.POST["name"]
+        planned_type = request.POST["planned_type"]
+        frequency = request.POST["frequency"]
+        recurrence = request.POST.get("recurrence", False)
+        amount = request.POST["amount"]
+        date = request.POST["date"]
+
+        # print(name)
+        # print(planned_type)
+        # print(frequency)
+        # print(type(frequency))
+        # print(recurrence)
+        # print(amount)
+        # print(type(amount))
+        print(date)
+        print(type(date))
+
+        if not name or not planned_type or not frequency or not amount or not date or ((int(frequency) == 2) and not recurrence):
+            return render(request, "finance/records.html", {
+                "message": "Incomplete fields. Please try again.",
+                "types": Record.TYPE_CHOICES,
+                "categories": Record.CATEGORY_CHOICES,
+                "frequency": Planned.FREQUENCY_CHOICES,
+                "recurrences": Planned.RECURRENCE_CHOICES,
+                "records": records
+            })
+
+        try:
+            planned_type = int(planned_type)
+            frequency = int(frequency)
+            recurrence = int(recurrence)
+
+            if planned_type == 1:
+                amount = float(amount)
+            else: 
+                amount = -(float(amount))
+                
+            if amount == 0:
+                return render(request, "finance/records.html", {
+                    "message": "Incomplete fields. Please try again.",
+                    "types": Record.TYPE_CHOICES,
+                    "categories": Record.CATEGORY_CHOICES,
+                    "frequency": Planned.FREQUENCY_CHOICES,
+                    "recurrences": Planned.RECURRENCE_CHOICES,
+                    "records": records
+                })                
+            
+        except: 
+            return render(request, "finance/records.html", {
+                "message": "An unknown error occured. Please try again.",
+                "types": Record.TYPE_CHOICES,
+                "categories": Record.CATEGORY_CHOICES,
+                "frequency": Planned.FREQUENCY_CHOICES,
+                "recurrences": Planned.RECURRENCE_CHOICES,
+                "records": records
+            })
+
+
+        return HttpResponseRedirect(reverse("records"))
+
+    else:
+        return HttpResponseRedirect(reverse("records"))
+
+@login_required
+def delete(request, record_id):
+    if request.method == "POST":
+        record = Record.objects.get(id=record_id)
+        origin_url = request.POST["origin_url"]
+        record.delete()
+        if origin_url == "dashboard":
+            return HttpResponseRedirect(reverse("dashboard"))
+        
+        elif origin_url == "records":
+            return HttpResponseRedirect(reverse("records"))
+
+    else:
+        return HttpResponseRedirect(reverse("dashboard"))
