@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     recurring_payment_button.addEventListener('click', () => enable_recurrence());
 
     // Settle the minimum date for the date input
-    const today = new Date().toISOString().split("T")[0];
-    document.querySelector('#date').min = today;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.querySelector('#date').min = tomorrow.toISOString().split("T")[0];
 });
 
 function show_record_form() {

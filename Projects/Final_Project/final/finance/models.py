@@ -17,7 +17,8 @@ class Record(models.Model):
         (8, "Financial Expenses"),
         (9, "Investments"),
         (10, "Income"),
-        (11, "Others")
+        (11, "Others"),
+        (0, "Planned Payment")
     ]
 
     TYPE_CHOICES = [

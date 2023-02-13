@@ -32,11 +32,64 @@ def login_user(request):
 
         if user is not None :
             login(request, user)
+
+
+            current_date = datetime.now().date()
+            planneds = Planned.objects.filter(user=user)
+
+            for planned in planneds:
+
+                # time = datetime.now()
+
+                # new_record = Record(
+                #     user = user,
+                #     record_type = planned.planned_type,
+                #     category = 0,
+                #     amount = planned.amount,
+                #     comment = f"{planned.frequency} Payment for {planned.name}",
+                #     time = time
+                # )
+                # new_record.save()
+
+                if planned.date == current_date:
+                    # time = datetime.now()
+
+                    # new_record = Record(
+                    #     user = user,
+                    #     record_type = planned.planned_type,
+                    #     category = 0,
+                    #     amount = planned.amount,
+                    #     comment = f"{planned.frequency} Payment for {planned.name}",
+                    #     time = time
+                    # )
+                    # new_record.save()
+                    
+                    if planned.frequency == 1:
+                        # One Time payment
+
+                        # Remove from database
+                        print("One time")
+
+                    elif planned.frequency == 2:
+                        # recurrent
+
+                        # Update database dates
+                        if planned.recurrence == 1:
+                            print("daily")
+                        elif planned.recurrence == 2:
+                            print("weekly")
+                        elif planned.recurrence == 3:
+                            print("monthly")
+                        elif planned.recurrence == 4:
+                            print("yearly")
+
             return HttpResponseRedirect(reverse("dashboard"))
+
         elif user is None:
             return render(request, "finance/login.html", {
                 "message": "Incorrect username or password. Please try again."
             })
+
         else:
             return render(request, "finance/login.html", {
                 "message": "An unknown error occured. Please try again."
@@ -116,7 +169,7 @@ def dashboard(request):
     current_date = datetime.now().date()
     past_seven_days = current_date - timedelta(days=6)
     past_thirty_days = current_date - timedelta(days=29)
-
+    
     past_7_income = Record.objects.filter(user=user, record_type=1, time__range=(past_seven_days, current_date + timedelta(days=1)))
     past_7_expense = Record.objects.filter(user=user, record_type=2, time__range=(past_seven_days, current_date + timedelta(days=1)))
     past_30_expense = Record.objects.filter(user=user, record_type=2, time__range=(past_thirty_days, current_date + timedelta(days=1)))
@@ -177,6 +230,8 @@ def records(request):
     page_number = request.GET.get('page')
     records = paginator.get_page(page_number)
 
+    planneds = Planned.objects.filter(user=user).order_by("-date")
+
     if request.method == "POST":
         record_type = request.POST["record_type"]
         category = request.POST.get("category", False)
@@ -191,7 +246,8 @@ def records(request):
                 "categories": Record.CATEGORY_CHOICES,
                 "frequency": Planned.FREQUENCY_CHOICES,
                 "recurrences": Planned.RECURRENCE_CHOICES,
-                "records": records
+                "records": records,
+                "planneds": planneds
             })
 
         try: 
@@ -210,8 +266,21 @@ def records(request):
                     "categories": Record.CATEGORY_CHOICES,
                     "frequency": Planned.FREQUENCY_CHOICES,
                     "recurrences": Planned.RECURRENCE_CHOICES,
-                    "records": records
-                })                
+                    "records": records,
+                    "planneds": planneds
+                })     
+
+            if category == 0:
+                return render(request, "finance/records.html", {
+                    "message": "Category cannot be a planned payment. Please try again.",
+                    "types": Record.TYPE_CHOICES,
+                    "categories": Record.CATEGORY_CHOICES,
+                    "frequency": Planned.FREQUENCY_CHOICES,
+                    "recurrences": Planned.RECURRENCE_CHOICES,
+                    "records": records,
+                    "planneds": planneds
+                })     
+
 
             new_record = Record(
                 user = user,
@@ -228,7 +297,8 @@ def records(request):
                 "categories": Record.CATEGORY_CHOICES,
                 "frequency": Planned.FREQUENCY_CHOICES,
                 "recurrences": Planned.RECURRENCE_CHOICES,                
-                "records": records
+                "records": records,
+                "planneds": planneds
             })            
 
         except:
@@ -238,7 +308,8 @@ def records(request):
                 "categories": Record.CATEGORY_CHOICES,
                 "frequency": Planned.FREQUENCY_CHOICES,
                 "recurrences": Planned.RECURRENCE_CHOICES,
-                "records": records
+                "records": records,
+                "planneds": planneds
             })
 
     else:
@@ -247,7 +318,8 @@ def records(request):
             "categories": Record.CATEGORY_CHOICES,
             "frequency": Planned.FREQUENCY_CHOICES,
             "recurrences": Planned.RECURRENCE_CHOICES,
-            "records": records
+            "records": records,
+            "planneds": planneds
         })
 
 @login_required
@@ -260,6 +332,8 @@ def planned(request):
     page_number = request.GET.get('page')
     records = paginator.get_page(page_number)
 
+    planneds = Planned.objects.filter(user=user).order_by("-date")
+
     if request.method == "POST":
         name = request.POST["name"]
         planned_type = request.POST["planned_type"]
@@ -268,16 +342,6 @@ def planned(request):
         amount = request.POST["amount"]
         date = request.POST["date"]
 
-        # print(name)
-        # print(planned_type)
-        # print(frequency)
-        # print(type(frequency))
-        # print(recurrence)
-        # print(amount)
-        # print(type(amount))
-        print(date)
-        print(type(date))
-
         if not name or not planned_type or not frequency or not amount or not date or ((int(frequency) == 2) and not recurrence):
             return render(request, "finance/records.html", {
                 "message": "Incomplete fields. Please try again.",
@@ -285,13 +349,16 @@ def planned(request):
                 "categories": Record.CATEGORY_CHOICES,
                 "frequency": Planned.FREQUENCY_CHOICES,
                 "recurrences": Planned.RECURRENCE_CHOICES,
-                "records": records
+                "records": records,
+                "planneds": planneds
             })
 
         try:
             planned_type = int(planned_type)
             frequency = int(frequency)
             recurrence = int(recurrence)
+            date = datetime.strptime(date, "%Y-%m-%d").date()
+            current_date = datetime.now().date()
 
             if planned_type == 1:
                 amount = float(amount)
@@ -300,14 +367,59 @@ def planned(request):
                 
             if amount == 0:
                 return render(request, "finance/records.html", {
-                    "message": "Incomplete fields. Please try again.",
+                    "message": "Amount cannot be 0. Please try again.",
                     "types": Record.TYPE_CHOICES,
                     "categories": Record.CATEGORY_CHOICES,
                     "frequency": Planned.FREQUENCY_CHOICES,
                     "recurrences": Planned.RECURRENCE_CHOICES,
-                    "records": records
+                    "records": records,
+                    "planneds": planneds
                 })                
             
+            if date <= current_date:
+                return render(request, "finance/records.html", {
+                    "message": "Date must be in the future. Please try again.",
+                    "types": Record.TYPE_CHOICES,
+                    "categories": Record.CATEGORY_CHOICES,
+                    "frequency": Planned.FREQUENCY_CHOICES,
+                    "recurrences": Planned.RECURRENCE_CHOICES,
+                    "records": records,
+                    "planneds": planneds
+                })          
+
+
+            if frequency == 2:
+                new_planned = Planned(
+                    user = user,
+                    planned_type = planned_type,
+                    frequency = frequency,
+                    recurrence = recurrence,
+                    name = name,
+                    amount = amount,
+                    date = date
+                )
+            
+            else:
+                new_planned = Planned(
+                    user = user,
+                    planned_type = planned_type,
+                    frequency = frequency,
+                    name = name,
+                    amount = amount,
+                    date = date
+                )
+
+            new_planned.save()
+
+            return render(request, "finance/records.html", {
+                "types": Record.TYPE_CHOICES,
+                "categories": Record.CATEGORY_CHOICES,
+                "frequency": Planned.FREQUENCY_CHOICES,
+                "recurrences": Planned.RECURRENCE_CHOICES,                
+                "records": records,
+                "planneds": planneds
+            })     
+
         except: 
             return render(request, "finance/records.html", {
                 "message": "An unknown error occured. Please try again.",
@@ -315,25 +427,32 @@ def planned(request):
                 "categories": Record.CATEGORY_CHOICES,
                 "frequency": Planned.FREQUENCY_CHOICES,
                 "recurrences": Planned.RECURRENCE_CHOICES,
-                "records": records
+                "records": records,
+                "planneds": planneds
             })
-
-
-        return HttpResponseRedirect(reverse("records"))
 
     else:
         return HttpResponseRedirect(reverse("records"))
 
 @login_required
-def delete(request, record_id):
+def delete(request, id):
     if request.method == "POST":
-        record = Record.objects.get(id=record_id)
         origin_url = request.POST["origin_url"]
-        record.delete()
+        
+        if origin_url == "dashboard" or origin_url == "records":
+            record = Record.objects.get(id=id)
+            record.delete()
+        elif origin_url == "planned": 
+            record = Planned.objects.get(id=id)
+            record.delete()
+
         if origin_url == "dashboard":
             return HttpResponseRedirect(reverse("dashboard"))
         
         elif origin_url == "records":
+            return HttpResponseRedirect(reverse("records"))
+
+        elif origin_url == "planned":
             return HttpResponseRedirect(reverse("records"))
 
     else:
