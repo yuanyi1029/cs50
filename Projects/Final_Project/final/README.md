@@ -3,9 +3,11 @@
 
 This is my capstone project for CS50W. Finance Tracker is a simple web application built for users to document their financial activity as well as further understand their own spending habits and financial activity.
 
+### :man_astronaut: &nbsp; Show your support
+
 
 ## Distinctiveness and Complexity
-The idea for this project stemmed from receiving red envelopes from my relatives during the Lunar New Year because it would be much easier to document my earnings `:money_mouth_face:`. 
+The idea for this project stemmed from receiving red envelopes from my relatives during the Lunar New Year because it would be much easier to document my earnings :joy: . 
 
 ## What’s contained in each file you created.
 
