@@ -7,7 +7,7 @@ This is my capstone project for CS50W. Finance Tracker is a simple web applicati
 
 
 ## Distinctiveness and Complexity
-The idea for this project stemmed from receiving red envelopes from my relatives during the Lunar New Year because it would be much easier to document my earnings :joy: . 
+The idea for this project stemmed from receiving red envelopes from my relatives during the Lunar New Year because it would be much easier to document my earnings :money_mouth_face:. 
 
 ## What’s contained in each file you created.
 
