@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.db import IntegrityError
 from django.utils import timezone
+from dateutil.relativedelta import relativedelta
 from django.core.paginator import Paginator
 from datetime import datetime, timedelta
 
@@ -37,51 +38,50 @@ def login_user(request):
             current_date = datetime.now().date()
             planneds = Planned.objects.filter(user=user)
 
+            seven_days_later = current_date + timedelta(days=7)
+            print(seven_days_later)
+
+
+            x = datetime(2023, 1, 31).date()
+            print(x + relativedelta(months=1))
+            print(x + relativedelta(months=2))
+
             for planned in planneds:
+                print(current_date + relativedelta(months=1))
+                print(type(planned.date))
 
-                # time = datetime.now()
-
-                # new_record = Record(
-                #     user = user,
-                #     record_type = planned.planned_type,
-                #     category = 0,
-                #     amount = planned.amount,
-                #     comment = f"{planned.frequency} Payment for {planned.name}",
-                #     time = time
-                # )
-                # new_record.save()
+                print(type(planned))
 
                 if planned.date == current_date:
-                    # time = datetime.now()
+                    time = datetime.now()
 
-                    # new_record = Record(
-                    #     user = user,
-                    #     record_type = planned.planned_type,
-                    #     category = 0,
-                    #     amount = planned.amount,
-                    #     comment = f"{planned.frequency} Payment for {planned.name}",
-                    #     time = time
-                    # )
-                    # new_record.save()
+                    new_record = Record(
+                        user = user,
+                        record_type = planned.planned_type,
+                        category = 0,
+                        amount = planned.amount,
+                        comment = f"{Planned.FREQUENCY_CHOICES[planned.frequency-1][1]} Payment for {planned.name}",
+                        time = time
+                    )
+
+                    new_record.save()
                     
                     if planned.frequency == 1:
-                        # One Time payment
-
-                        # Remove from database
-                        print("One time")
+                        planned.delete()
 
                     elif planned.frequency == 2:
-                        # recurrent
-
-                        # Update database dates
                         if planned.recurrence == 1:
-                            print("daily")
+                            planned.date = current_date + timedelta(days=1)
+                            planned.save()
                         elif planned.recurrence == 2:
-                            print("weekly")
+                            planned.date = current_date + timedelta(days=7)
+                            planned.save()
                         elif planned.recurrence == 3:
-                            print("monthly")
+                            planned.date = current_date + relativedelta(months=1)
+                            planned.save()
                         elif planned.recurrence == 4:
-                            print("yearly")
+                            planned.date = current_date + relativedelta(years=1)
+                            planned.save()
 
             return HttpResponseRedirect(reverse("dashboard"))
 
@@ -230,7 +230,7 @@ def records(request):
     page_number = request.GET.get('page')
     records = paginator.get_page(page_number)
 
-    planneds = Planned.objects.filter(user=user).order_by("-date")
+    planneds = Planned.objects.filter(user=user).order_by("date")
 
     if request.method == "POST":
         record_type = request.POST["record_type"]
@@ -332,7 +332,7 @@ def planned(request):
     page_number = request.GET.get('page')
     records = paginator.get_page(page_number)
 
-    planneds = Planned.objects.filter(user=user).order_by("-date")
+    planneds = Planned.objects.filter(user=user).order_by("date")
 
     if request.method == "POST":
         name = request.POST["name"]

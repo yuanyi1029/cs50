@@ -4,5 +4,34 @@
 {% block title %}Welcome{% endblock %}
 
 {% block body %}
-    <h1>Welcome Page</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7">
+                <div class="row" id="welcome-main">                    
+                    <div class="col">
+                        <span class="blue">C</span>
+                        <span class="red">S</span>
+                        <span class="yellow">5</span>
+                        <span class="blue">0</span>
+                        <span class="green">W</span>
+                        <span class="purple">Finance Tracker</span>
+                    </div>
+                </div>
+                <div class="row" id="welcome-secondary">The Best Finance Tracker.</div>
+                <div class="row" id="welcome-tertiary">Stay on top of your finances with expense-income tracking and reporting. Reach your financial goals with CS50W Finance Tracker.</div>
+                <br>
+                <a class="btn btn-success" href="{% url 'register' %}">Try Now - It's Free</a>
+            </div>
+
+            <div class="col-xl-5">
+                <img id="finance-img"src="{% static 'finance/finance.svg' %}" alt="Finance Illustration"/>
+            </div>
+        </div>
+    </div>
+
+    <br><br><hr>
+
+
 {% endblock %}
+
+

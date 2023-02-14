@@ -184,7 +184,11 @@
                                     {% endif %}
                                 {% endfor%}
     
-                                <th> {{ record.amount }}</th>
+                                {% if record.amount > 0 %}
+                                    <th style="color: green">{{ record.amount }}</th>
+                                {% else %}
+                                    <th style="color: red">{{ record.amount }}</th>
+                                {% endif %}
     
                                 {% if not record.comment %}
                                     <td>None</td>
@@ -208,15 +212,6 @@
         <div class="row">
             <div><a href="{% url 'records' %}">View all Records.</a></div>
         </div>
-    </div>
-
-    <div class="container">
-        <!-- {% for record in records %}
-            <h6>{{ record.amount }}</h6>
-        {% endfor %} -->
-        <h6 id="testy">{{ pie_data.apple }}</h6>
-        <h6 id="testy">{{ pie_data.banana}}</h6>
-        <h6 id="testy2"></h6>
     </div>
 
 {% endblock %}

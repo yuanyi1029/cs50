@@ -106,7 +106,12 @@
                                 {% endif %}
                             {% endfor%}
 
-                            <th>{{ record.amount }}</th>
+
+                            {% if record.amount > 0 %}
+                                <th style="color: green">{{ record.amount }}</th>
+                                {% else %}
+                                <th style="color: red">{{ record.amount }}</th>
+                            {% endif %}
 
                             {% if not record.comment %}
                                 <td>None</td>
@@ -251,6 +256,8 @@
                 <button type="submit" class="btn btn-primary" id="add_planned_button">Add Record</button>
             </form>
         </div>
+        
+        <br>
 
         <div class="row table-responsive">
             <table class="table table-hover">
@@ -277,8 +284,13 @@
                                 {% endfor%}
                             {% endif %}
 
-                            <th>{{ planned.amount }}</th>
+                            {% if planned.amount > 0 %}
+                                <th style="color: green">{{ planned.amount }}</th>
+                            {% else %}
+                                <th style="color: red">{{ planned.amount }}</th>
+                            {% endif %}
 
+                        
                             <td>{{ planned.date |date:"F d, Y" }}</td>
 
                             <td>
