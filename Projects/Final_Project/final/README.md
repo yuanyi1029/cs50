@@ -3,11 +3,23 @@
 
 This is my capstone project for CS50W. Finance Tracker is a simple web application built for users to document their financial activity as well as further understand their own spending habits and financial activity.
 
-### :man_astronaut: &nbsp; Show your support
-
 
 ## Distinctiveness and Complexity
-The idea for this project stemmed from receiving red envelopes from my relatives during the Lunar New Year because it would be much easier to document my earnings :money_mouth_face:. 
+The idea for this project stemmed from receiving red envelopes from my relatives during the Lunar New Year because I thought it would be much easier to document my earnings on a computer :money_mouth_face:. From there, the idea spiralled into documenting not only my red envelope earnings, but my expenses as well as to get an insight on my own spending habits. 
+
+During the development of this web application, not only had I used all the programming and markup languages as well as skills learned during this course (Python, Django, CSS, Javascript), I had also done plenty of research and explored  with new technical fields from implementing data charts with Chart.js to implementing the smallest user interface details and mobile responsiveness with bootstrap. As a result, I am proud to have been able to improve on my previously learned skills from this course as well as pick up some new ones along the way.
+
+Furthermore, I also believe that my project is unique compared to other projects done in this course because it provides a personalised solution for me to manage my finances. Also, this web application both retrieves and analyses financial data for users, which is something highly relevant and useful for people of all ages, making it unique and also untapped with potential for future feature additions.
+
+
+not only have I improved on my skills ,learned quite a few new things as well as some 
+
+
+As for the distinctiveness of this project, I think my project is unique compared to other projects done in this course   
+
+<!-- The difference between this web application and previous projects is that this application makes use and manages the data to check the assignments / quizes, create the quizes / assignments, check the results of the assignments instantly. With the potential to include more features in the future with respect to other services such as submission date, due date and, more. -->
+<!-- 
+I think this project is interesting because it satisfies a need that I had, which is to create reading lists and keep track of the books I am currently reading and the books which I already read. Also, I think it is interesting because I used all the languages we used during the course, as well as the fact that this time I was not provided with any started code and had to do it from scratch. I used git for source control, html, css, databases, an api, bootstrap, django, python and javascript. During the development of this project I did a lot of research to try to implement details, that I didn't know how to do before and I learned some things that went beyond the course. -->
 
 ## What’s contained in each file you created.
 
