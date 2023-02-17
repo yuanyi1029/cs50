@@ -174,37 +174,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for record in records %}
-                            <tr>
-                                <td scope="row">{{ record.time | date:"F j, Y, g:i A"}}</td>
-    
-                                {% for category in categories %}
-                                    {% if category.0 == record.category %}
-                                        <td>{{ category.1 }}</td>
-                                    {% endif %}
-                                {% endfor%}
-    
-                                {% if record.amount > 0 %}
-                                    <th style="color: green">{{ record.amount }}</th>
-                                {% else %}
-                                    <th style="color: red">{{ record.amount }}</th>
-                                {% endif %}
-    
-                                {% if not record.comment %}
-                                    <td>None</td>
+                        {% if not records %}
+                            <th>Not Record Data</th>
+                        {% else %}
+                            {% for record in records %}
+                                <tr>
+                                    <td scope="row">{{ record.time | date:"F j, Y, g:i A"}}</td>
+        
+                                    {% for category in categories %}
+                                        {% if category.0 == record.category %}
+                                            <td>{{ category.1 }}</td>
+                                        {% endif %}
+                                    {% endfor%}
+        
+                                    {% if record.amount > 0 %}
+                                        <th style="color: green">{{ record.amount }}</th>
                                     {% else %}
-                                    <td>{{ record.comment }}</td>
-                                {% endif %}
+                                        <th style="color: red">{{ record.amount }}</th>
+                                    {% endif %}
+        
+                                    {% if not record.comment %}
+                                        <td>None</td>
+                                        {% else %}
+                                        <td>{{ record.comment }}</td>
+                                    {% endif %}
 
-                                <td>
-                                    <form action="{% url 'delete' record.id %}" method="post">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="origin_url" value="dashboard">
-                                        <input class="btn btn-danger" type="submit" name="delete" value="Delete">
-                                    </form>
-                                </td>
-                            </tr>
-                        {% endfor %}
+                                    <td>
+                                        <form action="{% url 'delete' record.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="origin_url" value="dashboard">
+                                            <input class="btn btn-danger" type="submit" name="delete" value="Delete">
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        {% endif %}
                     </tbody>
                 </table>
             </div>            

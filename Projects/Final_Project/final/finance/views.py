@@ -33,25 +33,11 @@ def login_user(request):
 
         if user is not None :
             login(request, user)
-
-
+            
             current_date = datetime.now().date()
             planneds = Planned.objects.filter(user=user)
 
-            seven_days_later = current_date + timedelta(days=7)
-            print(seven_days_later)
-
-
-            x = datetime(2023, 1, 31).date()
-            print(x + relativedelta(months=1))
-            print(x + relativedelta(months=2))
-
             for planned in planneds:
-                print(current_date + relativedelta(months=1))
-                print(type(planned.date))
-
-                print(type(planned))
-
                 if planned.date == current_date:
                     time = datetime.now()
 
@@ -200,7 +186,7 @@ def dashboard(request):
     # Making a dictionary for pie chart data
     pie_data = {}
 
-    for record in Record.objects.all():
+    for record in Record.objects.filter(user=user):
         category = Record.CATEGORY_CHOICES[record.category-1][1]
 
         if record.record_type == 2:
@@ -208,7 +194,6 @@ def dashboard(request):
                 pie_data[category] = -(record.amount)
             else:
                 pie_data[category] += -(record.amount)
-
 
     return render(request, "finance/dashboard.html", {
         "records": Record.objects.filter(user=user).order_by("-time")[:10],
@@ -292,14 +277,7 @@ def records(request):
             )
             new_record.save()
 
-            return render(request, "finance/records.html", {
-                "types": Record.TYPE_CHOICES,
-                "categories": Record.CATEGORY_CHOICES,
-                "frequency": Planned.FREQUENCY_CHOICES,
-                "recurrences": Planned.RECURRENCE_CHOICES,                
-                "records": records,
-                "planneds": planneds
-            })            
+            return HttpResponseRedirect(reverse("records"))
 
         except:
             return render(request, "finance/records.html", {

@@ -96,38 +96,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for record in records %}
-                        <tr>
-                            <td scope="row">{{ record.time | date:"F j, Y, g:i A" }}</td>
+                    {% if not records %}
+                        <th>No Record Data</th>
+                    {% else %}
+                        {% for record in records %}
+                            <tr>
+                                <td scope="row">{{ record.time | date:"F j, Y, g:i A" }}</td>
 
-                            {% for category in categories %}
-                                {% if category.0 == record.category %}
-                                    <td>{{ category.1 }}</td>
+                                {% for category in categories %}
+                                    {% if category.0 == record.category %}
+                                        <td>{{ category.1 }}</td>
+                                    {% endif %}
+                                {% endfor%}
+
+
+                                {% if record.amount > 0 %}
+                                    <th style="color: green">{{ record.amount }}</th>
+                                    {% else %}
+                                    <th style="color: red">{{ record.amount }}</th>
                                 {% endif %}
-                            {% endfor%}
 
+                                {% if not record.comment %}
+                                    <td>None</td>
+                                    {% else %}
+                                    <td>{{ record.comment }}</td>
+                                {% endif %}
 
-                            {% if record.amount > 0 %}
-                                <th style="color: green">{{ record.amount }}</th>
-                                {% else %}
-                                <th style="color: red">{{ record.amount }}</th>
-                            {% endif %}
-
-                            {% if not record.comment %}
-                                <td>None</td>
-                                {% else %}
-                                <td>{{ record.comment }}</td>
-                            {% endif %}
-
-                            <td>
-                                <form action="{% url 'delete' record.id %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="origin_url" value="records">
-                                    <input class="btn btn-danger" type="submit" name="delete" value="Delete">
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                                <td>
+                                    <form action="{% url 'delete' record.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="origin_url" value="records">
+                                        <input class="btn btn-danger" type="submit" name="delete" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>
@@ -270,38 +274,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for planned in planneds %}
-                        <tr>
-                            <td scope="row">{{ planned.name }}</td>
+                    {% if not planneds %}
+                        <th>No Record Data</th>
+                    {% else %}
+                        {% for planned in planneds %}
+                            <tr>
+                                <td scope="row">{{ planned.name }}</td>
 
-                            {% if planned.frequency == 1 %}
-                                <td>One-Time</td>
-                            {% else %}
-                                {% for recurrence in recurrences %}
-                                    {% if recurrence.0 == planned.recurrence %}
-                                        <td>{{ recurrence.1 }}</td>
-                                    {% endif %}
-                                {% endfor%}
-                            {% endif %}
+                                {% if planned.frequency == 1 %}
+                                    <td>One-Time</td>
+                                {% else %}
+                                    {% for recurrence in recurrences %}
+                                        {% if recurrence.0 == planned.recurrence %}
+                                            <td>{{ recurrence.1 }}</td>
+                                        {% endif %}
+                                    {% endfor%}
+                                {% endif %}
 
-                            {% if planned.amount > 0 %}
-                                <th style="color: green">{{ planned.amount }}</th>
-                            {% else %}
-                                <th style="color: red">{{ planned.amount }}</th>
-                            {% endif %}
+                                {% if planned.amount > 0 %}
+                                    <th style="color: green">{{ planned.amount }}</th>
+                                {% else %}
+                                    <th style="color: red">{{ planned.amount }}</th>
+                                {% endif %}
 
-                        
-                            <td>{{ planned.date |date:"F d, Y" }}</td>
+                            
+                                <td>{{ planned.date |date:"F d, Y" }}</td>
 
-                            <td>
-                                <form action="{% url 'delete' planned.id %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="origin_url" value="planned">
-                                    <input class="btn btn-danger" type="submit" name="delete" value="Delete">
-                                </form>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                                <td>
+                                    <form action="{% url 'delete' planned.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="origin_url" value="planned">
+                                        <input class="btn btn-danger" type="submit" name="delete" value="Delete">
+                                    </form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </tbody>
             </table>
         </div>
