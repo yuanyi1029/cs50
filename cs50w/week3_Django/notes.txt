@@ -4,7 +4,7 @@ python
 
 Terminal Commands Related to Django:
 pip install Django
-Django-admin startproject <project_name>
+django-admin startproject <project_name>
 python manage.py runserver
 python manage.py startapp <app_name>
 

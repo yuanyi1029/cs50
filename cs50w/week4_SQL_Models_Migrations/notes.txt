@@ -1,5 +1,17 @@
+----------------------------------- Database ----------------------------------
+A database is large organized collection of data stored in a computer
+
+Types of databases:
+1) Flat file databases
+Flat file databases are databases that stores data in a single sheet 
+
+2) Relational databases 
+Relational databases are databases that stores data in rows or columns
+
 ------------------------------------- SQL -------------------------------------
-Database language designed to interact with relational databases management systems 
+SQL stands for Structured Query Language is a database language designed to interact
+with relational databases management systems by storing, updating, inserting, and
+deleting data in a database
 
 Example database management systems:
 1) MySQL
@@ -44,6 +56,28 @@ Joining tables:
     FROM tableOneName JOIN tableTwoName 
     ON tableOneName.primaryKey = tableTwoName.foreignKey
 
+Selecting columns:
+    SELECT columns FROM table;
+    SELECT * FROM table;
+
+Selection functions:
+    AVG         MIN
+    COUNT       MAX
+    LOWER       DISTINCT
+    UPPER
+
+Selection conditions:
+    WHERE       GROUP BY
+    LIKE        LIMIT
+    ORDER BY
+
+Examples:
+    CREATE TABLE users(id INTEGER, name TEXT, age INTEGER);
+    INSERT INTO users(id, name, age) VALUES (1, Ben, 19);
+    UPDATE users SET age = 20 WHERE name="Ben";
+    DELETE FROM users WHERE name="Ben";
+    SELECT * FROM users WHERE id=1;
+
 ----------------------------------- Models ------------------------------------
 Each application in a Django project has a pre-created file called models.py which
 consists of python classes that represent data that Django should store in a database
@@ -73,79 +107,3 @@ python manage.py createsuperuser
 
 Adding models to admin.py file:
 admin.site.register(modelName)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
------------------------------------ Database ----------------------------------
-A database is large organized collection of data stored in a computer
-
-Types of databases:
-1) Flat file databases
-Flat file databases are databases that stores data in a single sheet 
-
-2) Relational databases 
-Relational databases are databases that stores data in rows or columns
-
-
-------------------------------------- SQL -------------------------------------
-SQL stands for Structured Query Language used for storing, updating, inserting,
-deleting data in a database
-SQL provide 4 main operations on a table: 
-1) Insert 
-2) Select
-3) Update 
-4) Delete
-
-Creating a table:
-    CREATE TABLE tablename (column type, ...);
-
-Inserting data:
-    INSERT INTO table (column, ...) VALUES (value, ...);
-
-Updating data:
-    UPDATE table SET column = value WHERE condition;
-
-Deleting data:
-    DELETE FROM table WHERE condition;
-
-Selecting columns:
-    SELECT columns FROM table;
-    SELECT * FROM table;
-
-Selection functions:
-    AVG         MIN
-    COUNT       MAX
-    LOWER       DISTINCT
-    UPPER
-
-Selection conditions:
-    WHERE       GROUP BY
-    LIKE        LIMIT
-    ORDER BY
-
-Examples:
-    CREATE TABLE users(id INTEGER, name TEXT, age INTEGER);
-    INSERT INTO users(id, name, age) VALUES (1, Ben, 19);
-    UPDATE users SET age = 20 WHERE name="Ben";
-    DELETE FROM users WHERE name="Ben";
-    SELECT * FROM users WHERE id=1;
